@@ -1,0 +1,17 @@
+set editing-mode vi
+set show-mode-in-prompt on
+
+$if mode=vi
+  set keymap vi-command
+  "\C-p":history-search-backward
+  "\C-n":history-search-forward
+  "\C-l":clear-screen
+  "\e[5~":history-search-backward
+  "\e[6~":history-search-forward
+  set keymap vi-insert
+  "\C-p":history-search-backward
+  "\C-n":history-search-forward
+  "\C-l":clear-screen
+  "\e[5~":history-search-backward
+  "\e[6~":history-search-forward
+$endif
