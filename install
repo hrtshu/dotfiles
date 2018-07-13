@@ -1,0 +1,55 @@
+#!/bin/bash
+
+if [ -z "${BASH_SOURCE}" ]; then
+    echo "Please execute with bash" 1>&2
+    return 1
+fi
+
+if [ "${BASH_SOURCE}" != "$0" ]; then
+    echo "Don't use . (dot) and source command. Please execute directory." 1>&2
+    return 1
+fi
+
+DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
+DOTFILES_FILES=(".profile" ".inputrc" ".gitconfig")
+
+VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
+VIMRUNTIME_ROOT_DIR=".vim_runtime"
+VIMRUNTIME_INSTALLER_FILE="install_awesome_vimrc.sh"
+
+if [ $# -ge 2 ]; then
+    echo "Usage: $0 [destination]" 1>&2
+    exit 1
+fi
+
+DEST="$1"
+[ -z "$DEST" ] && DEST=~
+if [ ! -d "$DEST" ]; then
+    echo "Not exists or not a directory: $DEST" 1>&2
+    exit 1
+fi
+
+for git in "/usr/bin/git" "/bin/git"; do
+    if [ -x "$git" ]; then
+        GIT="$git"
+        break
+    fi
+done
+
+VIMRUNTIME_ROOT="$DEST/$VIMRUNTIME_ROOT_DIR"
+VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
+
+for file in "${DOTFILES_FILES[@]}"; do
+    src="$DOTFILES_ROOT/$file"
+    dst="$DEST/$file"
+    ln -f -s "$src" "$dst"
+done
+
+if [ ! -e "$VIMRUNTIME_ROOT" ]; then
+    if [ ! -z "$GIT" ]; then
+        "$GIT" clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
+        . "$VIMRUNTIME_INSTALLER"
+    else
+        echo "Skipped vimrc installation because Git is not installed." 1>& 2
+    fi
+fi
