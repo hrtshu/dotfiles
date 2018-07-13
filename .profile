@@ -25,3 +25,10 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+export EDITOR=vim
+
+if grep -q "Microsoft" /proc/sys/kernel/osrelease; then
+    export DISPLAY=localhost:0.0
+    export DOCKER_HOST='tcp://localhost:2375'
+fi
