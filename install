@@ -53,3 +53,8 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
         echo "Skipped vimrc installation because Git is not installed." 1>&2
     fi
 fi
+
+if grep -q Microsoft /proc/sys/kernel/osrelease; then
+    echo "Please enter your password to install /etc/sudoers.d/sudoers.nopasswd"
+    sudo sh -c "cp \"$DOTFILES_ROOT/sudoers.nopasswd\" /etc/sudoers.d/ && chown 0:0 /etc/sudoers.d/sudoers.nopasswd"
+fi
