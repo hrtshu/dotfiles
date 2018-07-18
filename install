@@ -50,6 +50,6 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
         "$GIT" clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
         . "$VIMRUNTIME_INSTALLER"
     else
-        echo "Skipped vimrc installation because Git is not installed." 1>& 2
+        echo "Skipped vimrc installation because Git is not installed." 1>&2
     fi
 fi
