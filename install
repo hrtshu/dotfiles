@@ -11,7 +11,7 @@ if [ "${BASH_SOURCE}" != "$0" ]; then
 fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
-DOTFILES_FILES=(".profile" ".inputrc" ".gitconfig")
+DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig")
 
 VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
