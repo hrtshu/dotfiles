@@ -54,6 +54,11 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     fi
 fi
 
+HOME=~
+if [ "$DEST" == "$HOME" -a -x /usr/bin/xdg-user-dirs-update ]; then
+    /usr/bin/xdg-user-dirs-update
+fi
+
 if grep -q Microsoft /proc/sys/kernel/osrelease; then
     echo "Please enter your password to install /etc/sudoers.d/sudoers.nopasswd"
     sudo sh -c "
