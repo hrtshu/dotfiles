@@ -12,6 +12,9 @@ fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
 DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf")
+SUDOERS_NOPASSWD="sudoers.nopasswd"
+SUDOERS_NOPASSWD_DEST="nopasswd"
+WSL_CONF="wsl.conf"
 
 VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
@@ -61,14 +64,14 @@ fi
 
 if grep -q Microsoft /proc/sys/kernel/osrelease; then
     echo "Please enter your password to install /etc/sudoers.d/sudoers.nopasswd"
+    nopasswd_dest="/etc/sudoers.d/$SUDOERS_NOPASSWD_DEST"
     sudo sh -c "
-        cp \"$DOTFILES_ROOT/sudoers.nopasswd\" /etc/sudoers.d/ &&
-        chown 0:0 /etc/sudoers.d/sudoers.nopasswd &&
-        chmod 440 /etc/sudoers.d/sudoers.nopasswd
+        cp \"$DOTFILES_ROOT/$SUDOERS_NOPASSWD\" \"$nopasswd_dest\" &&
+        chown 0:0 \"$nopasswd_dest\" && chmod 440 \"$nopasswd_dest\"
     "
+    wsl_dest="/etc/$WSL_CONF"
     sudo sh -c "
-        cp \"$DOTFILES_ROOT/wsl.conf\" /etc/ &&
-        chown 0:0 /etc/wsl.conf &&
-        chmod 644 /etc/wsl.conf
+        cp \"$DOTFILES_ROOT/$WSL_CONF\" \"$wsl_dest\" &&
+        chown 0:0 \"$wsl_dest\" && chmod 644 \"$wsl_dest\"
     "
 fi
