@@ -20,6 +20,9 @@ VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
 VIMRUNTIME_INSTALLER_FILE="install_awesome_vimrc.sh"
 
+XDG_DIRS_UPDATE=/usr/bin/xdg-user-dirs-update
+OS_RELEASE=/proc/sys/kernel/osrelease
+
 if [ $# -ge 2 ]; then
     echo "Usage: $0 [destination]" 1>&2
     exit 1
@@ -58,11 +61,11 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
 fi
 
 HOME=~
-if [ "$DEST" == "$HOME" -a -x /usr/bin/xdg-user-dirs-update ]; then
-    /usr/bin/xdg-user-dirs-update
+if [ "$DEST" == "$HOME" -a -x "$XDG_DIRS_UPDATE" ]; then
+    "$XDG_DIRS_UPDATE"
 fi
 
-if grep -q Microsoft /proc/sys/kernel/osrelease; then
+if [ -r "$OS_RELEASE" ] && grep -q Microsoft "$OS_RELEASE"; then
     echo "Please enter your password to install /etc/sudoers.d/sudoers.nopasswd"
     nopasswd_dest="/etc/sudoers.d/$SUDOERS_NOPASSWD_DEST"
     sudo sh -c "
