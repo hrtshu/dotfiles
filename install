@@ -12,6 +12,7 @@ fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
 DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf")
+SSH_CONFIG="ssh_config"
 SUDOERS_NOPASSWD="sudoers.nopasswd"
 SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
@@ -42,6 +43,7 @@ for git in "/usr/bin/git" "/bin/git"; do
     fi
 done
 
+SSH_DIR="$DEST/.ssh/"
 VIMRUNTIME_ROOT="$DEST/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 
@@ -50,6 +52,9 @@ for file in "${DOTFILES_FILES[@]}"; do
     dst="$DEST/$file"
     ln -f -s "$src" "$dst"
 done
+
+[ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
+ln -f -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/config"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
