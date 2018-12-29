@@ -54,6 +54,7 @@ for file in "${DOTFILES_FILES[@]}"; do
 done
 
 [ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
+chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
 ln -f -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/config"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
