@@ -34,3 +34,7 @@ if [ -r "$OS_RELEASE" ] && grep -q "Microsoft" "$OS_RELEASE"; then
     export DOCKER_HOST='tcp://localhost:2375'
     export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
 fi
+
+if [ -x /usr/bin/keychain ]; then
+    eval `/usr/bin/keychain --eval --agents ssh --noask`
+fi
