@@ -1,11 +1,1 @@
-Host github.com
-  HostName ssh.github.com
-  Port 443
-
-Host gitlab.com
-  HostName altssh.gitlab.com
-  Port 443
-
-Host bitbucket.org
-  HostName altssh.bitbucket.org
-  Port 443
+Include config.d/*

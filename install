@@ -13,6 +13,9 @@ fi
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
 DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf")
 SSH_CONFIG="ssh_config"
+SSH_CONFIG_DEST="config"
+SSH_GIT_CONFIG="ssh_git_config"
+SSH_GIT_CONFIG_DEST="git"
 SUDOERS_NOPASSWD="sudoers.nopasswd"
 SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
@@ -43,7 +46,8 @@ for git in "/usr/bin/git" "/bin/git"; do
     fi
 done
 
-SSH_DIR="$DEST/.ssh/"
+SSH_DIR="$DEST/.ssh"
+SSH_CONFIG_DIR="$SSH_DIR/config.d"
 VIMRUNTIME_ROOT="$DEST/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 
@@ -54,8 +58,11 @@ for file in "${DOTFILES_FILES[@]}"; do
 done
 
 [ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
+[ ! -e "$SSH_CONFIG_DIR" ] && mkdir "$SSH_CONFIG_DIR"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
-ln -f -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/config"
+chmod -f 600 "$DOTFILES_ROOT/$SSH_GIT_CONFIG"
+ln -f -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
+ln -f -s "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
