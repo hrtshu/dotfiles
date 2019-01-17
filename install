@@ -11,7 +11,7 @@ if [ "${BASH_SOURCE}" != "$0" ]; then
 fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
-DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf")
+DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigrc")
 SSH_CONFIG="ssh_config"
 SSH_CONFIG_DEST="config"
 SSH_GIT_CONFIG="ssh_git_config"
