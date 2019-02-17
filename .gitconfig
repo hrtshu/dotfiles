@@ -3,3 +3,7 @@
 [user]
 	email = sh7916@gmail.com
 	name = Shuhei
+[merge]
+	ff = false
+[pull]
+	ff = only
