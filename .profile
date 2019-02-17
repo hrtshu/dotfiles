@@ -27,6 +27,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 export EDITOR=vim
+export LESS="$LESS -R"
 
 OS_RELEASE=/proc/sys/kernel/osrelease
 if [ -r "$OS_RELEASE" ] && grep -q "Microsoft" "$OS_RELEASE"; then
