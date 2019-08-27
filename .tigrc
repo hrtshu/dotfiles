@@ -4,3 +4,5 @@ bind diff    T !git rebase -i %(commit)
 
 # https://qiita.com/sfus/items/063797a1dd8fdc7d032f
 bind generic + !git commit --amend --allow-empty
+
+bind main    H !git checkout %(commit)
