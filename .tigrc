@@ -6,3 +6,8 @@ bind diff    T !git rebase -i %(commit)
 bind generic + !git commit --amend --allow-empty
 
 bind main    H !git checkout %(commit)
+
+bind generic S !git stash push
+bind status  S !git stash push -u -- %(file)
+bind generic Y !git stash pop --index
+bind stash   Y !git stash pop --index %(stash)
