@@ -54,15 +54,15 @@ VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 for file in "${DOTFILES_FILES[@]}"; do
     src="$DOTFILES_ROOT/$file"
     dst="$DEST/$file"
-    ln -f -s "$src" "$dst"
+    ln -i -s "$src" "$dst"
 done
 
 [ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
 [ ! -e "$SSH_CONFIG_DIR" ] && mkdir "$SSH_CONFIG_DIR"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_GIT_CONFIG"
-ln -f -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
-ln -f -s "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
+ln -i -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
+ln -i -s "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
@@ -82,12 +82,12 @@ if [ -r "$OS_RELEASE" ] && grep -q Microsoft "$OS_RELEASE"; then
     echo "Please enter your password to install /etc/sudoers.d/sudoers.nopasswd"
     nopasswd_dest="/etc/sudoers.d/$SUDOERS_NOPASSWD_DEST"
     sudo sh -c "
-        cp \"$DOTFILES_ROOT/$SUDOERS_NOPASSWD\" \"$nopasswd_dest\" &&
+        cp -i \"$DOTFILES_ROOT/$SUDOERS_NOPASSWD\" \"$nopasswd_dest\" &&
         chown 0:0 \"$nopasswd_dest\" && chmod 440 \"$nopasswd_dest\"
     "
     wsl_dest="/etc/$WSL_CONF"
     sudo sh -c "
-        cp \"$DOTFILES_ROOT/$WSL_CONF\" \"$wsl_dest\" &&
+        cp -i \"$DOTFILES_ROOT/$WSL_CONF\" \"$wsl_dest\" &&
         chown 0:0 \"$wsl_dest\" && chmod 644 \"$wsl_dest\"
     "
 fi
