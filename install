@@ -15,7 +15,9 @@ DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigr
 SSH_CONFIG="ssh_config"
 SSH_CONFIG_DEST="config"
 SSH_GIT_CONFIG="ssh_git_config"
+SSH_AGENT_CONFIG="ssh_agent_config"
 SSH_GIT_CONFIG_DEST="git"
+SSH_GIT_AGENT_DEST="agent"
 SUDOERS_NOPASSWD="sudoers.nopasswd"
 SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
@@ -61,8 +63,10 @@ done
 [ ! -e "$SSH_CONFIG_DIR" ] && mkdir "$SSH_CONFIG_DIR"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_GIT_CONFIG"
+chmod -f 600 "$DOTFILES_ROOT/$SSH_AGENT_CONFIG"
 ln -i -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
 ln -i -s "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
+ln -i -s "$DOTFILES_ROOT/$SSH_AGENT_CONFIG" "$SSH_CONFIG_DIR/$SSH_AGENT_CONFIG_DEST"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
