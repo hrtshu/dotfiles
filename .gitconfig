@@ -7,3 +7,5 @@
 	ff = false
 [pull]
 	ff = only
+[pager]
+	branch = false
