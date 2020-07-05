@@ -29,6 +29,15 @@ VIMRUNTIME_INSTALLER_FILE="install_awesome_vimrc.sh"
 XDG_DIRS_UPDATE=/usr/bin/xdg-user-dirs-update
 OS_RELEASE=/proc/sys/kernel/osrelease
 
+function ln_ () {
+    src="$1"
+    dest="$2"
+
+    [ "$src" = "`readlink $dest`" ] && return
+
+    ln -i -s "$src" "$dest"
+}
+
 if [ $# -ge 2 ]; then
     echo "Usage: $0 [destination]" 1>&2
     exit 1
@@ -56,7 +65,7 @@ VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 for file in "${DOTFILES_FILES[@]}"; do
     src="$DOTFILES_ROOT/$file"
     dst="$DEST/$file"
-    ln -i -s "$src" "$dst"
+    ln_ "$src" "$dst"
 done
 
 [ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
@@ -64,9 +73,9 @@ done
 chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_GIT_CONFIG"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_AGENT_CONFIG"
-ln -i -s "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
-ln -i -s "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
-ln -i -s "$DOTFILES_ROOT/$SSH_AGENT_CONFIG" "$SSH_CONFIG_DIR/$SSH_AGENT_CONFIG_DEST"
+ln_ "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
+ln_ "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
+ln_ "$DOTFILES_ROOT/$SSH_AGENT_CONFIG" "$SSH_CONFIG_DIR/$SSH_AGENT_CONFIG_DEST"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
