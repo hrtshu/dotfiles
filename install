@@ -64,8 +64,8 @@ VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 
 for file in "${DOTFILES_FILES[@]}"; do
     src="$DOTFILES_ROOT/$file"
-    dst="$DEST/$file"
-    ln_ "$src" "$dst"
+    dest="$DEST/$file"
+    ln_ "$src" "$dest"
 done
 
 [ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
