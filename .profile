@@ -47,3 +47,5 @@ elif [ -x /usr/local/bin/brew ]; then
     # for Intel mac
     eval $(/usr/local/bin/brew shellenv)
 fi
+
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
