@@ -39,3 +39,11 @@ fi
 # if [ -x /usr/bin/keychain ]; then
 #     eval `/usr/bin/keychain --eval --agents ssh --noask`
 # fi
+
+if [ -x /opt/homebrew/bin/brew ]; then
+    # for M1 mac
+    eval $(/opt/homebrew/bin/brew shellenv)
+elif [ -x /usr/local/bin/brew ]; then
+    # for Intel mac
+    eval $(/usr/local/bin/brew shellenv)
+fi
