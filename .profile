@@ -41,3 +41,14 @@ fi
 # fi
 
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+
+PATHS=(
+    "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/file-formula/bin"
+)
+for P in "${PATHS[@]}"; do
+    [ -d "$P" ] && export PATH="$P:$PATH"
+done
+unset PATHS
