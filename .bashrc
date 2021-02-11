@@ -84,10 +84,8 @@ fi
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     dircolors=/usr/bin/dircolors
-elif [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
-    dircolors=/usr/local/opt/coreutils/libexec/gnubin/dircolors
-elif [ -x /opt/homebrew/opt/coreutils/libexec/gnubin/dircolors ]; then
-    dircolors=/opt/homebrew/opt/coreutils/libexec/gnubin/dircolors
+elif [ -x $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin/dircolors ]; then
+    dircolors=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin/dircolors
 fi
 if [ -x "$dircolors" ]; then
     test -r ~/.dircolors && eval "$($dircolors -b ~/.dircolors)" || eval "$($dircolors -b)"
