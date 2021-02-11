@@ -56,10 +56,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+PS1_ARCH=$(/usr/bin/uname -m)
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]$PS1_ARCH\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:$PS1_ARCH:\W\$ '
 fi
 unset color_prompt force_color_prompt
 
