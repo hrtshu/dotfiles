@@ -36,6 +36,8 @@ if [ -r "$OS_RELEASE" ] && grep -q "Microsoft" "$OS_RELEASE"; then
     export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
 fi
 
+[ "$(/usr/bin/uname -s)" = "Darwin" ] && export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # if [ -x /usr/bin/keychain ]; then
 #     eval `/usr/bin/keychain --eval --agents ssh --noask`
 # fi
