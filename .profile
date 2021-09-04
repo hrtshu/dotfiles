@@ -75,3 +75,4 @@ HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-
 unset HB_CNF_HANDLER
 
 command -v rbenv > /dev/null && eval "$(rbenv init -)"
+command -v direnv > /dev/null && eval "$(direnv hook bash)"
