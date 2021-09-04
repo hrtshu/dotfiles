@@ -66,3 +66,7 @@ for P in "${PATHS[@]}"; do
     [ -d "$P" ] && export PATH="$P:$PATH"
 done
 unset PATHS
+
+HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+[ -f "$HB_CNF_HANDLER" ] && source "$HB_CNF_HANDLER"
+unset HB_CNF_HANDLER
