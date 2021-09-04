@@ -49,6 +49,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/file-formula/bin"
     "$HOMEBREW_PREFIX/opt/unzip/bin"
     "$HOMEBREW_PREFIX/opt/ruby/bin"
@@ -61,6 +62,7 @@ PATHS=(
 
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
+    "$HOME/.cargo/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
 )
 for P in "${PATHS[@]}"; do
