@@ -49,6 +49,18 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/file-formula/bin"
+    "$HOMEBREW_PREFIX/opt/unzip/bin"
+    "$HOMEBREW_PREFIX/opt/ruby/bin"
+    "$HOMEBREW_PREFIX/opt/whois/bin"
+    "$HOMEBREW_PREFIX/opt/binutils/bin"
+    "$HOMEBREW_PREFIX/opt/e2fsprogs/bin"
+    "$HOMEBREW_PREFIX/opt/e2fsprogs/sbin"
+    "$HOMEBREW_PREFIX/lib/ruby/gems/3.0.0/bin"
+    "$HOMEBREW_PREFIX/opt/sqlite/bin"
+
+    "$HOME/Library/Python/3.9/bin"
+    "$HOME/.nodebrew/current/bin"
+    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
 )
 for P in "${PATHS[@]}"; do
     [ -d "$P" ] && export PATH="$P:$PATH"
