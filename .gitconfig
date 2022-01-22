@@ -1,5 +1,6 @@
 [core]
-	editor = vim
+    editor = vim
+    abbrev = 7
 [user]
 	email = sh7916@gmail.com
 	name = Shuhei
