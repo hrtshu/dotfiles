@@ -6,6 +6,7 @@
 	name = Shuhei
 [merge]
 	ff = false
+	conflictStyle = diff3
 [pull]
 	ff = only
 [pager]
