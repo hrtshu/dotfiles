@@ -50,6 +50,10 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/gnu-getopt/bin"
+    "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/gnu-time/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/file-formula/bin"
     "$HOMEBREW_PREFIX/opt/unzip/bin"
     "$HOMEBREW_PREFIX/opt/ruby/bin"
@@ -59,6 +63,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/e2fsprogs/sbin"
     "$HOMEBREW_PREFIX/lib/ruby/gems/3.0.0/bin"
     "$HOMEBREW_PREFIX/opt/sqlite/bin"
+    "$HOMEBREW_PREFIX/opt/openssl@3/bin"
 
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
