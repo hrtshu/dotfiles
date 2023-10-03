@@ -54,6 +54,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/gnu-getopt/bin"
     "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/gnu-time/libexec/gnubin"
+    "$HOMEBREW_PREFIX/opt/make/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/file-formula/bin"
     "$HOMEBREW_PREFIX/opt/unzip/bin"
     "$HOMEBREW_PREFIX/opt/ruby/bin"
