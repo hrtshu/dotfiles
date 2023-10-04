@@ -74,9 +74,10 @@ PATHS=(
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
 )
 for P in "${PATHS[@]}"; do
-    [ -d "$P" ] && export PATH="$P:$PATH"
+    [ -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
 done
-unset PATHS
+export PATH="$NEW_PATH:$PATH"
+unset PATHS NEW_PATH
 
 HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
 [ -f "$HB_CNF_HANDLER" ] && source "$HB_CNF_HANDLER"
