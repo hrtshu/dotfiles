@@ -34,6 +34,7 @@ brew "vim"
 brew "watch"
 brew "wget"
 brew "whois"
+brew "asdf"
 
 # optional
 brew "awscli"
