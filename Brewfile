@@ -77,3 +77,4 @@ cask "microsoft-powerpoint"
 # mas
 mas "Speedtest by Ookla", id: 1153157709
 mas "AS Timer", id: 512464723
+mas "Battery Monitor: Health, Info", id: 836505650
