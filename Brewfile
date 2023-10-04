@@ -52,3 +52,22 @@ brew "socat"
 brew "sqlite"
 brew "tor"
 brew "youtube-dl"
+
+# cask
+cask "visual-studio-code"
+cask "alacritty"
+cask "slack"
+cask "zoom"
+cask "microsoft-remote-desktop"
+cask "postman"
+cask "altair-graphql-client"
+cask "mysqlworkbench"
+cask "docker"
+cask "android-studio"
+
+# mas
+# mas "Microsoft Excel", id: 462058435
+# mas "Microsoft Word", id: 462054704
+# mas "Microsoft PowerPoint", id: 462062816
+mas "Speedtest by Ookla", id: 1153157709
+mas "AS Timer", id: 512464723
