@@ -66,6 +66,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/sqlite/bin"
     "$HOMEBREW_PREFIX/opt/openssl@3/bin"
     "$HOMEBREW_PREFIX/opt/curl/bin"
+    "$HOMEBREW_PREFIX/opt/python@3.11/libexec/bin"
 
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
