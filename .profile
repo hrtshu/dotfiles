@@ -90,3 +90,5 @@ command -v rbenv > /dev/null && eval "$(rbenv init -)"
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
 
 [ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+
+[ -f "$HOME/.profile_env" ] && source "$HOME/.profile_env"

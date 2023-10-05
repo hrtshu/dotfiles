@@ -111,3 +111,11 @@ if [ -r "$OS_RELEASE" ] && grep -q Microsoft "$OS_RELEASE"; then
         chown 0:0 \"$wsl_dest\" && chmod 644 \"$wsl_dest\"
     "
 fi
+
+if [ ! -f "$DEST/.profile_env" ]; then
+    cat >> "$DEST/.profile_env" <<EOF
+# 環境依存であることが自明な設定だけを追加しましょう
+# （例: トークンの設定 export BUNDLE_GITHUB__COM=x-access-token:xxxxxx ）
+
+EOF
+fi
