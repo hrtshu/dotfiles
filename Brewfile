@@ -1,3 +1,8 @@
+tap "homebrew/bundle"
+tap "homebrew/autoupdate"
+tap "homebrew/services"
+tap "homebrew/command-not-found"
+
 brew "bash"
 brew "bash-completion"
 brew "binutils"
