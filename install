@@ -124,3 +124,13 @@ fi
 if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew > /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+if command -v brew > /dev/null; then
+    brew bundle install --no-lock --file=<(grep -E "^(tap|brew)" "$DOTFILES_ROOT/Brewfile")
+
+    # homebrew-autoupdate
+    brew install -q terminal-notifier # ensure terminal-notifier is installed
+    brew autoupdate status | grep -q "Autoupdate is installed and running." || brew autoupdate start --upgrade --greedy --enable-notification
+    # TODO: SUDO_ASKPASS
+    # https://github.com/Homebrew/homebrew-autoupdate/issues/40
+fi
