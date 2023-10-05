@@ -119,3 +119,8 @@ if [ ! -f "$DEST/.profile_env" ]; then
 
 EOF
 fi
+
+# install brew on Mac
+if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew > /dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
