@@ -11,7 +11,7 @@ if [ "${BASH_SOURCE}" != "$0" ]; then
 fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
-DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigrc" ".asdfrc")
+DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigrc" ".asdfrc" ".Brewfile")
 SSH_CONFIG="ssh_config"
 SSH_CONFIG_DEST="config"
 SSH_GIT_CONFIG="ssh_git_config"
@@ -126,7 +126,7 @@ if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew > /dev/null; then
 fi
 
 if command -v brew > /dev/null; then
-    brew bundle install --no-lock --file=<(grep -E "^(tap|brew)" "$DOTFILES_ROOT/Brewfile")
+    brew bundle install --no-lock --file=<(grep -E "^(tap|brew)" "$DEST/.Brewfile")
 
     # homebrew-autoupdate
     brew install -q terminal-notifier # ensure terminal-notifier is installed
