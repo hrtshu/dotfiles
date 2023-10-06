@@ -83,6 +83,8 @@ PATHS=(
     "/usr/local/bin"
 )
 
+export ORIG_PATH="$PATH"
+
 # source
 for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
     [ -f "$SOURCE_FILE" ] && source "$SOURCE_FILE"
