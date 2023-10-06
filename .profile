@@ -79,7 +79,7 @@ PATHS=(
     "$HOME/.nodebrew/current/bin"
     "$HOME/.cargo/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
-    "$PATH"
+    "-----"
     "/usr/local/bin"
 )
 
@@ -91,7 +91,12 @@ unset SOURCE_FILES
 
 # path
 for P in "${PATHS[@]}"; do
-    [ "$P" == "$PATH" -o -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
+    if [ "$P" == "-----" ]; then
+        P="$PATH"
+    elif [ ! -d "$P" ]; then
+        continue
+    fi
+    NEW_PATH="$NEW_PATH:$P"
 done
 export PATH="$NEW_PATH"
 unset PATHS NEW_PATH
