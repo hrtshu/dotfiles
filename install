@@ -10,6 +10,11 @@ if [ "${BASH_SOURCE}" != "$0" ]; then
     return 1
 fi
 
+if [ $# -ge 2 ]; then
+    echo "Usage: $0 [destination]" 1>&2
+    exit 1
+fi
+
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
 DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigrc" ".asdfrc" ".Brewfile")
 SSH_CONFIG=.ssh/config:ssh_config
@@ -47,11 +52,6 @@ function deploy_conf () {
 
     mkdir -p "$(dirname "$DEST_DIR/$DEST")" && ln_ "$DOTFILES_ROOT/$SRC" "$DEST_DIR/$DEST"
 }
-
-if [ $# -ge 2 ]; then
-    echo "Usage: $0 [destination]" 1>&2
-    exit 1
-fi
 
 DEST_HOME="$1"
 [ -z "$DEST_HOME" ] && DEST_HOME=~
