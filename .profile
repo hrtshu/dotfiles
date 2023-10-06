@@ -54,6 +54,7 @@ SOURCE_FILES=(
 for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
     [ -f "$SOURCE_FILE" ] && source "$SOURCE_FILE"
 done
+unset SOURCE_FILES
 
 PATHS=(
     ~/.local/bin
