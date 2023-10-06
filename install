@@ -69,13 +69,6 @@ if [ ! -d "$DEST_HOME" ]; then
     exit 1
 fi
 
-for git in "/usr/bin/git" "/bin/git"; do
-    if [ -x "$git" ]; then
-        GIT="$git"
-        break
-    fi
-done
-
 for file in "${DOTFILES_FILES[@]}"; do
     deploy_conf "$DEST_HOME" "$file"
 done
@@ -88,8 +81,8 @@ fi
 VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
-    if [ ! -z "$GIT" ]; then
-        "$GIT" clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
+    if command -v git > /dev/null; then
+        git clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
         . "$VIMRUNTIME_INSTALLER"
     else
         echo "Skipped vimrc installation because Git is not installed." 1>&2
