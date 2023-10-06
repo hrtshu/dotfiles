@@ -23,9 +23,7 @@ SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
 ALACRITTY_CONF="alacritty.yml"
 ALACRITTY_CONF_DEST=".config/alacritty"
-GIT_CONF_DIR=".config/git"
-GIT_IGNORE="git_ignore"
-GIT_IGNORE_DEST="ignore"
+GIT_IGNORE=.config/git/ignore:git_ignore
 
 VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
@@ -91,7 +89,7 @@ ln_ "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
 ln_ "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
 [[ "$OSTYPE" == "darwin"* ]] && ln_ "$DOTFILES_ROOT/$SSH_AGENT_CONFIG" "$SSH_CONFIG_DIR/$SSH_AGENT_CONFIG_DEST"
 mkdir -p "$DEST_HOME/$ALACRITTY_CONF_DEST" && ln_ "$DOTFILES_ROOT/$ALACRITTY_CONF" "$DEST_HOME/$ALACRITTY_CONF_DEST/$ALACRITTY_CONF"
-mkdir -p "$DEST_HOME/$GIT_CONF_DIR" && ln_ "$DOTFILES_ROOT/$GIT_IGNORE" "$DEST_HOME/$GIT_CONF_DIR/$GIT_IGNORE_DEST"
+deploy_conf "$DEST_HOME" "$GIT_IGNORE"
 
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
