@@ -30,6 +30,7 @@ DOTFILES_FILES=(
     .config/alacritty/alacritty.yml
     .config/git/ignore:git_ignore
 )
+DOTFILES_FILES_MAC=(.ssh/config.d/agent:ssh_config_agent)
 SUDOERS_NOPASSWD="sudoers.nopasswd"
 SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
@@ -78,7 +79,11 @@ done
 for file in "${DOTFILES_FILES[@]}"; do
     deploy_conf "$DEST_HOME" "$file"
 done
-[[ "$OSTYPE" == "darwin"* ]] && deploy_conf "$DEST_HOME" .ssh/config.d/agent:ssh_config_agent
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    for file in "${DOTFILES_FILES_MAC[@]}"; do
+        deploy_conf "$DEST_HOME" "$file"
+    done
+fi
 
 VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
