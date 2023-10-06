@@ -43,15 +43,17 @@ unset OS_RELEASE
 #     eval `/usr/bin/keychain --eval --agents ssh --noask`
 # fi
 
-[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+SOURCE_FILES=(
+    "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    "$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+    "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+    "$HOME/.cargo/env"
+    "$HOME/.profile_env"
+)
 
-HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-[ -f "$HB_CNF_HANDLER" ] && source "$HB_CNF_HANDLER"
-unset HB_CNF_HANDLER
-
-[ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-[ -f "$HOME/.profile_env" ] && source "$HOME/.profile_env"
-[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
+    [ -f "$SOURCE_FILE" ] && source "$SOURCE_FILE"
+done
 
 PATHS=(
     "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
