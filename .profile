@@ -16,19 +16,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-export EDITOR=vim
-export LESS="$LESS -R"
-
-OS_RELEASE=/proc/sys/kernel/osrelease
-if [ -r "$OS_RELEASE" ] && grep -q "Microsoft" "$OS_RELEASE"; then
-    export DISPLAY=localhost:0.0
-    export DOCKER_HOST='tcp://localhost:2375'
-    export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
-fi
-unset OS_RELEASE
-
-[ "$(/usr/bin/uname -s)" = "Darwin" ] && export BASH_SILENCE_DEPRECATION_WARNING=1
-
 # if [ -x /usr/bin/keychain ]; then
 #     eval `/usr/bin/keychain --eval --agents ssh --noask`
 # fi
@@ -74,7 +61,21 @@ PATHS=(
     "/usr/local/bin"
 )
 
+# export
 export ORIG_PATH="$PATH"
+
+export EDITOR=vim
+export LESS="$LESS -R"
+
+OS_RELEASE=/proc/sys/kernel/osrelease
+if [ -r "$OS_RELEASE" ] && grep -q "Microsoft" "$OS_RELEASE"; then
+    export DISPLAY=localhost:0.0
+    export DOCKER_HOST='tcp://localhost:2375'
+    export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
+fi
+unset OS_RELEASE
+
+[ "$(/usr/bin/uname -s)" = "Darwin" ] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # source
 for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
