@@ -31,6 +31,8 @@ SOURCE_FILES=(
     "$HOME/.profile_env"
     "$HOME/google-cloud-sdk/path.bash.inc" # updates PATH for the Google Cloud SDK.
     "$HOME/google-cloud-sdk/completion.bash.inc" # enables shell command completion for gcloud.
+    "$HOME/.nvm/nvm.sh"
+    "$HOME/.nvm/bash_completion"
 )
 
 PATHS=(
