@@ -12,8 +12,7 @@ fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
 DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigrc" ".asdfrc" ".Brewfile")
-SSH_CONFIG="ssh_config"
-SSH_CONFIG_DEST="config"
+SSH_CONFIG=.ssh/config:ssh_config
 SSH_CONFIG_GIT=.ssh/config.d/git:ssh_config_git
 SSH_CONFIG_AGENT=.ssh/config.d/agent:ssh_config_agent
 SUDOERS_NOPASSWD="sudoers.nopasswd"
@@ -68,8 +67,6 @@ for git in "/usr/bin/git" "/bin/git"; do
     fi
 done
 
-SSH_DIR="$DEST_HOME/.ssh"
-SSH_CONFIG_DIR="$SSH_DIR/config.d"
 VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 
@@ -79,10 +76,7 @@ for file in "${DOTFILES_FILES[@]}"; do
     ln_ "$src" "$dest"
 done
 
-[ ! -e "$SSH_DIR" ] && mkdir "$SSH_DIR"
-[ ! -e "$SSH_CONFIG_DIR" ] && mkdir "$SSH_CONFIG_DIR"
-chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
-ln_ "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
+deploy_conf "$DEST_HOME" "$SSH_CONFIG"
 deploy_conf "$DEST_HOME" "$SSH_CONFIG_GIT"
 [[ "$OSTYPE" == "darwin"* ]] && deploy_conf "$DEST_HOME" "$SSH_CONFIG_AGENT"
 deploy_conf "$DEST_HOME" "$ALACRITTY_CONF"
