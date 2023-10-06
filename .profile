@@ -78,19 +78,18 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/curl/bin"
     "$HOMEBREW_PREFIX/opt/python@3/libexec/bin"
     "$HOMEBREW_PREFIX/opt/mysql@8.0/bin"
-
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
     "$HOME/.cargo/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
+    "$PATH"
+    "/usr/local/bin"
 )
 for P in "${PATHS[@]}"; do
-    [ -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
+    [ "$P" == "$PATH" -o -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
 done
-export PATH="$NEW_PATH:$PATH"
+export PATH="$NEW_PATH"
 unset PATHS NEW_PATH
-
-export PATH="$PATH:/usr/local/bin"
 
 command -v rbenv > /dev/null && eval "$(rbenv init -)"
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
