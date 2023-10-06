@@ -15,9 +15,8 @@ DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigr
 SSH_CONFIG="ssh_config"
 SSH_CONFIG_DEST="config"
 SSH_GIT_CONFIG="ssh_git_config"
-SSH_AGENT_CONFIG="ssh_agent_config"
 SSH_GIT_CONFIG_DEST="git"
-SSH_AGENT_CONFIG_DEST="agent"
+SSH_CONFIG_AGENT=.ssh/config.d/agent:ssh_config_agent
 SUDOERS_NOPASSWD="sudoers.nopasswd"
 SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
@@ -85,10 +84,9 @@ done
 [ ! -e "$SSH_CONFIG_DIR" ] && mkdir "$SSH_CONFIG_DIR"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_CONFIG"
 chmod -f 600 "$DOTFILES_ROOT/$SSH_GIT_CONFIG"
-chmod -f 600 "$DOTFILES_ROOT/$SSH_AGENT_CONFIG"
 ln_ "$DOTFILES_ROOT/$SSH_CONFIG" "$SSH_DIR/$SSH_CONFIG_DEST"
 ln_ "$DOTFILES_ROOT/$SSH_GIT_CONFIG" "$SSH_CONFIG_DIR/$SSH_GIT_CONFIG_DEST"
-[[ "$OSTYPE" == "darwin"* ]] && ln_ "$DOTFILES_ROOT/$SSH_AGENT_CONFIG" "$SSH_CONFIG_DIR/$SSH_AGENT_CONFIG_DEST"
+[[ "$OSTYPE" == "darwin"* ]] && deploy_conf "$DEST_HOME" "$SSH_CONFIG_AGENT"
 deploy_conf "$DEST_HOME" "$ALACRITTY_CONF"
 deploy_conf "$DEST_HOME" "$GIT_IGNORE"
 
