@@ -96,7 +96,6 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     fi
 fi
 
-HOME=~
 if [ "$DEST_HOME" == "$HOME" -a -x "$XDG_DIRS_UPDATE" ]; then
     "$XDG_DIRS_UPDATE"
 fi
