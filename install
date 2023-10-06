@@ -16,7 +16,16 @@ if [ $# -ge 2 ]; then
 fi
 
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
-DOTFILES_FILES=(".profile" ".bashrc" ".inputrc" ".gitconfig" ".tmux.conf" ".tigrc" ".asdfrc" ".Brewfile")
+DOTFILES_FILES=(
+    ".profile"
+    ".bashrc"
+    ".inputrc"
+    ".gitconfig"
+    ".tmux.conf"
+    ".tigrc"
+    ".asdfrc"
+    ".Brewfile"
+)
 SSH_CONFIG=.ssh/config:ssh_config
 SSH_CONFIG_GIT=.ssh/config.d/git:ssh_config_git
 SSH_CONFIG_AGENT=.ssh/config.d/agent:ssh_config_agent
