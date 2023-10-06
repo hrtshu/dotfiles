@@ -45,7 +45,7 @@ unset OS_RELEASE
 
 SOURCE_FILES=(
     "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-    "$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+    "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
     "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
     "$HOME/.cargo/env"
     "$HOME/.profile_env"
