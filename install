@@ -67,9 +67,6 @@ for git in "/usr/bin/git" "/bin/git"; do
     fi
 done
 
-VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
-VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
-
 for file in "${DOTFILES_FILES[@]}"; do
     deploy_conf "$DEST_HOME" "$file"
 done
@@ -79,6 +76,8 @@ deploy_conf "$DEST_HOME" "$SSH_CONFIG_GIT"
 deploy_conf "$DEST_HOME" "$ALACRITTY_CONF"
 deploy_conf "$DEST_HOME" "$GIT_IGNORE"
 
+VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
+VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if [ ! -z "$GIT" ]; then
         "$GIT" clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
