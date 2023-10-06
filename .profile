@@ -51,11 +51,6 @@ SOURCE_FILES=(
     "$HOME/.profile_env"
 )
 
-for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
-    [ -f "$SOURCE_FILE" ] && source "$SOURCE_FILE"
-done
-unset SOURCE_FILES
-
 PATHS=(
     ~/.local/bin
     "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
@@ -87,6 +82,14 @@ PATHS=(
     "$PATH"
     "/usr/local/bin"
 )
+
+# source
+for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
+    [ -f "$SOURCE_FILE" ] && source "$SOURCE_FILE"
+done
+unset SOURCE_FILES
+
+# path
 for P in "${PATHS[@]}"; do
     [ "$P" == "$PATH" -o -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
 done
