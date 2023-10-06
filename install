@@ -71,11 +71,8 @@ VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 
 for file in "${DOTFILES_FILES[@]}"; do
-    src="$DOTFILES_ROOT/$file"
-    dest="$DEST_HOME/$file"
-    ln_ "$src" "$dest"
+    deploy_conf "$DEST_HOME" "$file"
 done
-
 deploy_conf "$DEST_HOME" "$SSH_CONFIG"
 deploy_conf "$DEST_HOME" "$SSH_CONFIG_GIT"
 [[ "$OSTYPE" == "darwin"* ]] && deploy_conf "$DEST_HOME" "$SSH_CONFIG_AGENT"
