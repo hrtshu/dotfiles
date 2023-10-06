@@ -43,6 +43,15 @@ function ln_ () {
     ln -i -s "$src" "$dest"
 }
 
+function deploy_conf () {
+    DEST_DIR="$1"
+    IFS=, ARG=(${2//:/,}) # $2を:で分割して配列に格納
+    DEST="$DEST_DIR/${ARG[0]}"
+    SRC="$DOTFILES_ROOT/${ARG[1]}"
+
+    mkdir -p "$(dirname "$DEST")" && ln_ "$SRC" "$DEST"
+}
+
 if [ $# -ge 2 ]; then
     echo "Usage: $0 [destination]" 1>&2
     exit 1
