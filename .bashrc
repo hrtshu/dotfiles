@@ -73,16 +73,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# homebrew
-if [ "$(/usr/bin/uname -m)" = "arm64" -a -x /opt/homebrew/bin/brew ]; then
-    # for M1 mac
-    eval $(/opt/homebrew/bin/brew shellenv)
-    export PATH=$(echo $PATH | tr ':' '\n' | grep -Ev '/usr/local/bin/?' | tr '\n' ':')
-elif [ "$(/usr/bin/uname -m)" = "x86_64" -a -x /usr/local/bin/brew ]; then
-    # for Intel mac
-    eval $(/usr/local/bin/brew shellenv)
-fi
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     dircolors=/usr/bin/dircolors

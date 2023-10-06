@@ -8,6 +8,16 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# homebrew
+if [ "$(/usr/bin/uname -m)" = "arm64" -a -x /opt/homebrew/bin/brew ]; then
+    # for M1 mac
+    eval $(/opt/homebrew/bin/brew shellenv)
+    export PATH=$(echo $PATH | tr ':' '\n' | grep -Ev '/usr/local/bin/?' | tr '\n' ':')
+elif [ "$(/usr/bin/uname -m)" = "x86_64" -a -x /usr/local/bin/brew ]; then
+    # for Intel mac
+    eval $(/usr/local/bin/brew shellenv)
+fi
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
