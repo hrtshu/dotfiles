@@ -45,6 +45,14 @@ unset OS_RELEASE
 
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
+HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+[ -f "$HB_CNF_HANDLER" ] && source "$HB_CNF_HANDLER"
+unset HB_CNF_HANDLER
+
+[ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+[ -f "$HOME/.profile_env" ] && source "$HOME/.profile_env"
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
 PATHS=(
     "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
@@ -82,13 +90,5 @@ unset PATHS NEW_PATH
 
 export PATH="$PATH:/usr/local/bin"
 
-HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-[ -f "$HB_CNF_HANDLER" ] && source "$HB_CNF_HANDLER"
-unset HB_CNF_HANDLER
-
 command -v rbenv > /dev/null && eval "$(rbenv init -)"
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
-
-[ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-[ -f "$HOME/.profile_env" ] && source "$HOME/.profile_env"
-[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
