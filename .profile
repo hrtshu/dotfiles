@@ -56,6 +56,7 @@ for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
 done
 
 PATHS=(
+    ~/.local/bin
     "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
