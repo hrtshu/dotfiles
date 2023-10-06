@@ -8,6 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+export ORIG_PATH="$PATH"
+
 # homebrew
 [ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
 [ "$(/usr/bin/uname -m)" = "x86_64" ] && BREW=/usr/local/bin/brew # intel
@@ -61,8 +63,6 @@ PATHS=(
 )
 
 # export
-export ORIG_PATH="$PATH"
-
 export EDITOR=vim
 export LESS="$LESS -R"
 
