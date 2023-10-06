@@ -9,13 +9,9 @@
 #umask 022
 
 # homebrew
-if [ "$(/usr/bin/uname -m)" = "arm64" -a -x /opt/homebrew/bin/brew ]; then
-    # for M1 mac
-    eval $(/opt/homebrew/bin/brew shellenv)
-elif [ "$(/usr/bin/uname -m)" = "x86_64" -a -x /usr/local/bin/brew ]; then
-    # for Intel mac
-    eval $(/usr/local/bin/brew shellenv)
-fi
+[ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
+[ "$(/usr/bin/uname -m)" = "x86_64" ] && BREW=/usr/local/bin/brew # intel
+[ -x "$BREW" ] && eval $($BREW shellenv)
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
