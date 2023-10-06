@@ -62,7 +62,7 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:$PS1_ARCH:\W\$ '
 fi
-unset color_prompt force_color_prompt
+unset color_prompt force_color_prompt PS1_ARCH
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
