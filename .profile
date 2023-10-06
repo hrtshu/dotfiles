@@ -16,10 +16,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# if [ -x /usr/bin/keychain ]; then
-#     eval `/usr/bin/keychain --eval --agents ssh --noask`
-# fi
-
 SOURCE_FILES=(
     "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
     "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
@@ -95,5 +91,7 @@ done
 export PATH="$NEW_PATH"
 unset PATHS NEW_PATH
 
+# eval
+# [ -x /usr/bin/keychain ] && eval $(/usr/bin/keychain --eval --agents ssh --noask)
 command -v rbenv > /dev/null && eval "$(rbenv init -)"
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
