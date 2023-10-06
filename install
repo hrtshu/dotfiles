@@ -25,15 +25,14 @@ DOTFILES_FILES=(
     .tigrc
     .asdfrc
     .Brewfile
+    .ssh/config:ssh_config
+    .ssh/config.d/git:ssh_config_git
+    .config/alacritty/alacritty.yml
+    .config/git/ignore:git_ignore
 )
-SSH_CONFIG=.ssh/config:ssh_config
-SSH_CONFIG_GIT=.ssh/config.d/git:ssh_config_git
-SSH_CONFIG_AGENT=.ssh/config.d/agent:ssh_config_agent
 SUDOERS_NOPASSWD="sudoers.nopasswd"
 SUDOERS_NOPASSWD_DEST="nopasswd"
 WSL_CONF="wsl.conf"
-ALACRITTY_CONF=.config/alacritty/alacritty.yml
-GIT_IGNORE=.config/git/ignore:git_ignore
 
 VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
@@ -79,11 +78,7 @@ done
 for file in "${DOTFILES_FILES[@]}"; do
     deploy_conf "$DEST_HOME" "$file"
 done
-deploy_conf "$DEST_HOME" "$SSH_CONFIG"
-deploy_conf "$DEST_HOME" "$SSH_CONFIG_GIT"
-[[ "$OSTYPE" == "darwin"* ]] && deploy_conf "$DEST_HOME" "$SSH_CONFIG_AGENT"
-deploy_conf "$DEST_HOME" "$ALACRITTY_CONF"
-deploy_conf "$DEST_HOME" "$GIT_IGNORE"
+[[ "$OSTYPE" == "darwin"* ]] && deploy_conf "$DEST_HOME" .ssh/config.d/agent:ssh_config_agent
 
 VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
