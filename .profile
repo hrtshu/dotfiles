@@ -69,14 +69,6 @@ PATHS=(
 export EDITOR=vim
 export LESS="$LESS -R"
 
-OS_RELEASE=/proc/sys/kernel/osrelease
-if [ -r "$OS_RELEASE" ] && grep -q "Microsoft" "$OS_RELEASE"; then
-    export DISPLAY=localhost:0.0
-    export DOCKER_HOST='tcp://localhost:2375'
-    export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
-fi
-unset OS_RELEASE
-
 [ "$(/usr/bin/uname -s)" = "Darwin" ] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # source
