@@ -84,6 +84,19 @@ done
 export PATH="$NEW_PATH:$PATH"
 unset PATHS NEW_PATH
 
+# remove duplicates
+old_PATH="$PATH:"; PATH=
+while [ -n "$old_PATH" ]; do
+    x="${old_PATH%%:*}"      # the first remaining entry
+    case "$PATH": in
+        *:"$x":*) ;;         # already there
+        *) PATH="$PATH:$x";; # not there yet
+    esac
+    old_PATH="${old_PATH#*:}"
+done
+export PATH="${PATH#:}"
+unset old_PATH x
+
 # eval
 # [ -x /usr/bin/keychain ] && eval $(/usr/bin/keychain --eval --agents ssh --noask)
 command -v rbenv > /dev/null && eval "$(rbenv init -)"
