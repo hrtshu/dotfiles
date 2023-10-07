@@ -99,7 +99,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.apple.dock autohide -int 1
     defaults write com.apple.dock show-recents -int 0
     defaults write com.apple.dock tilesize -int 80
-    killall Dock
+    # killall Dock
 
     # menubar
     defaults write com.apple.menuextra.clock ShowSeconds -int 1
