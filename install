@@ -63,6 +63,7 @@ if [ ! -d "$DEST_HOME" ]; then
     exit 1
 fi
 
+##### dotfiles & config #####
 for file in "${DOTFILES_FILES[@]}"; do
     deploy_conf "$DEST_HOME" "$file"
 done
@@ -72,6 +73,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     done
 fi
 
+##### vim #####
 VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
@@ -83,6 +85,7 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     fi
 fi
 
+##### others #####
 [ "$DEST_HOME" == "$HOME" ] && command -v xdg-user-dirs-update > /dev/null && xdg-user-dirs-update
 
 if [ ! -f "$DEST_HOME/.profile_env" ]; then
@@ -93,11 +96,10 @@ if [ ! -f "$DEST_HOME/.profile_env" ]; then
 EOF
 fi
 
-# install brew on Mac
+##### brew #####
 if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew > /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-
 if command -v brew > /dev/null; then
     brew bundle install --no-lock --file=<(grep -E "^(tap|brew)" "$DEST_HOME/.Brewfile")
 
