@@ -28,11 +28,11 @@ SOURCE_FILES=(
     "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
     "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
     "$HOME/.cargo/env"
-    "$HOME/.profile_env"
-    "$HOME/google-cloud-sdk/path.bash.inc" # updates PATH for the Google Cloud SDK.
-    "$HOME/google-cloud-sdk/completion.bash.inc" # enables shell command completion for gcloud.
     "$HOME/.nvm/nvm.sh"
     "$HOME/.nvm/bash_completion"
+    "$HOME/google-cloud-sdk/path.bash.inc" # updates PATH for the Google Cloud SDK.
+    "$HOME/google-cloud-sdk/completion.bash.inc" # enables shell command completion for gcloud.
+    "$HOME/.profile_env"
 )
 
 PATHS=(
