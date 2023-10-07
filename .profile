@@ -10,6 +10,11 @@
 
 export ORIG_PATH=${ORIG_PATH:-"$PATH"}
 
+##### export #####
+export EDITOR=vim
+export LESS="$LESS -R"
+[[ "$OSTYPE" == "darwin"* ]] && export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # homebrew
 [ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
 [ "$(/usr/bin/uname -m)" = "x86_64" ] && BREW=/usr/local/bin/brew # intel
@@ -64,11 +69,6 @@ PATHS=(
     "$HOME/.cargo/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )
-
-##### export #####
-export EDITOR=vim
-export LESS="$LESS -R"
-[[ "$OSTYPE" == "darwin"* ]] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ##### source #####
 for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
