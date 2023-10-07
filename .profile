@@ -81,6 +81,7 @@ unset SOURCE_FILES
 for P in "${PATHS[@]}"; do
     [ -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
 done
+export NEW_PATH="${NEW_PATH#:}"
 export PATH="$NEW_PATH:$PATH"
 unset PATHS NEW_PATH
 
