@@ -1,3 +1,8 @@
+
+# set diff-options = --first-parent
+# set log-options = --first-parent
+# set main-options = -m --first-parent
+
 # https://qiita.com/numanomanu/items/513d62fb4a7921880085
 bind main    T !git rebase -i %(commit)
 bind diff    T !git rebase -i %(commit)
