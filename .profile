@@ -65,19 +65,19 @@ PATHS=(
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )
 
-# export
+##### export #####
 export EDITOR=vim
 export LESS="$LESS -R"
 
 [ "$(/usr/bin/uname -s)" = "Darwin" ] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
-# source
+##### source #####
 for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
     [ -f "$SOURCE_FILE" ] && source "$SOURCE_FILE"
 done
 unset SOURCE_FILES
 
-# path
+##### path #####
 for P in "${PATHS[@]}"; do
     [ -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
 done
@@ -98,7 +98,7 @@ done
 export PATH="${PATH#:}"
 unset old_PATH x
 
-# eval
+##### eval #####
 # [ -x /usr/bin/keychain ] && eval $(/usr/bin/keychain --eval --agents ssh --noask)
 command -v rbenv > /dev/null && eval "$(rbenv init -)"
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
