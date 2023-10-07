@@ -62,7 +62,7 @@ PATHS=(
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
     "$HOME/.cargo/bin"
-    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
+    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )
 
 # export
