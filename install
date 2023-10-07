@@ -134,7 +134,7 @@ fi
 if command -v brew > /dev/null; then
     TMP_BREWFILE="$(mktemp)"
     grep -E "^(tap|brew)" "$DEST_HOME/.Brewfile" > "$TMP_BREWFILE"
-    brew bundle check -q --file="$TMP_BREWFILE" > /dev/null || brew bundle install --no-lock --no-upgrade --file="$TMP_BREWFILE"
+    brew bundle check -q --no-upgrade --file="$TMP_BREWFILE" > /dev/null || brew bundle install --no-lock --no-upgrade --file="$TMP_BREWFILE"
 
     # homebrew-autoupdate
     brew install -q terminal-notifier # ensure terminal-notifier is installed
