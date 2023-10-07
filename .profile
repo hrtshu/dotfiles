@@ -8,7 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-export ORIG_PATH="$PATH"
+export ORIG_PATH=${ORIG_PATH:-"$PATH"}
 
 # homebrew
 [ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
