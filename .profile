@@ -68,8 +68,7 @@ PATHS=(
 ##### export #####
 export EDITOR=vim
 export LESS="$LESS -R"
-
-[ "$(/usr/bin/uname -s)" = "Darwin" ] && export BASH_SILENCE_DEPRECATION_WARNING=1
+[[ "$OSTYPE" == "darwin"* ]] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ##### source #####
 for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
