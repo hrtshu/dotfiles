@@ -47,19 +47,19 @@ if [ -z "${BASH_SOURCE}" ]; then
 fi
 
 if [ "${BASH_SOURCE}" != "$0" ]; then
-    echo "Don't use . (dot) and source command. Please execute directory." 1>&2
+    echo "Don't use . (dot) and source command. Please execute as script." 1>&2
     return 1
 fi
 
 if [ $# -ge 2 ]; then
-    echo "Usage: $0 [destination]" 1>&2
+    echo "Usage: $0 [dest_home_dir]" 1>&2
     exit 1
 fi
 
 DEST_HOME="$1"
 [ -z "$DEST_HOME" ] && DEST_HOME=~
 if [ ! -d "$DEST_HOME" ]; then
-    echo "Not exists or not a directory: $DEST_HOME" 1>&2
+    echo "No such directory: $DEST_HOME" 1>&2
     exit 1
 fi
 
@@ -81,7 +81,7 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
         git clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
         . "$VIMRUNTIME_INSTALLER"
     else
-        echo "Skipped vimrc installation because Git is not installed." 1>&2
+        echo "vimrc installation was skipped (git is not installed)." 1>&2
     fi
 fi
 
