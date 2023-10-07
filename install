@@ -85,6 +85,37 @@ if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     fi
 fi
 
+##### mac system #####
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    defaults write -g AppleSpacesSwitchOnActivate -int 0 # アプリケーションの切り替えで、アプリケーションのウインドウが開いている操作スペースに移動
+    defaults write -g _HIHideMenuBar -int 1
+    defaults write -g TISRomanSwitchState -int 1 # IME switching by caps lock key
+
+    # Trackpad
+    defaults write -g com.apple.trackpad.scaling -string 1.5 # trackpad speed
+    defaults write -g com.apple.trackpad.scrolling -string 0.5881999999999999 # scroll speed
+
+    # Dock
+    defaults write com.apple.dock autohide -int 1
+    defaults write com.apple.dock show-recents -int 0
+    defaults write com.apple.dock tilesize -int 80
+    killall Dock
+
+    # menubar
+    defaults write com.apple.menuextra.clock ShowSeconds -int 1
+
+    # shortcut key
+    ## mission control (option + tab)
+    ## ref: https://ottan.jp/posts/2016/07/system-preferences-terminal-defaults-mission-control#mission-control
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><true/><key>value</key><dict><key>type</key><string>standard</string><key>parameters</key><array><integer>65535</integer><integer>48</integer><integer>524288</integer></array></dict></dict>"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 "<dict><key>enabled</key><true/><key>value</key><dict><key>type</key><string>standard</string><key>parameters</key><array><integer>65535</integer><integer>48</integer><integer>655360</integer></array></dict></dict>"
+
+    # screenshot
+    mkdir -p ~/Pictures/Screenshots
+    defaults write com.apple.screencapture location '~/Pictures/Screenshots'
+    defaults write com.apple.screencapture location-last '~/Pictures/Screenshots'
+fi
+
 ##### others #####
 [ "$DEST_HOME" == "$HOME" ] && command -v xdg-user-dirs-update > /dev/null && xdg-user-dirs-update
 
