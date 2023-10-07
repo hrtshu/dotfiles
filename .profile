@@ -13,6 +13,7 @@ export ORIG_PATH=${ORIG_PATH:-"$PATH"}
 ##### export #####
 export EDITOR=vim
 export LESS="$LESS -R"
+[ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 [[ "$OSTYPE" == "darwin"* ]] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # homebrew
@@ -67,6 +68,7 @@ PATHS=(
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
     "$HOME/.cargo/bin"
+    "$GOPATH/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )
 
