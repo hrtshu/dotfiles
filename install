@@ -114,6 +114,18 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     mkdir -p ~/Pictures/Screenshots
     defaults write com.apple.screencapture location '~/Pictures/Screenshots'
     defaults write com.apple.screencapture location-last '~/Pictures/Screenshots'
+
+    # Clipy
+    defaults write com.clipy-app.Clipy loginItem -int 1 # この設定を付与した後にClipyを一度も起動しないと、おそらくログイン項目に追加されない
+    defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInlineKey -int 10
+    defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int 0
+    defaults write com.clipy-app.Clipy kCPYBetaDeleteHistory -int 1
+    defaults write com.clipy-app.Clipy kCPYPrefStoreTypesKey "<dict><key>Filenames</key><true/><key>PDF</key><true/><key>RTF</key><true/><key>RTFD</key><true/><key>String</key><true/><key>TIFF</key><true/><key>URL</key><true/></dict>"
+    defaults write com.clipy-app.Clipy kCPYHotKeyMainKeyCombo "<data>YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGjCwwVVSRudWxs1A0ODxAREhMUViRjbGFzc1ltb2RpZmllcnNXa2V5Q29kZV8QEGRvdWJsZWRNb2RpZmllcnOAAhEDABAfCNIWFxgZWiRjbGFzc25hbWVYJGNsYXNzZXNfEA9NYWduZXQuS2V5Q29tYm+iGhtfEA9NYWduZXQuS2V5Q29tYm9YTlNPYmplY3QIERokKTI3SUxRU1ddZm13f5KUl5man6qzxcjaAAAAAAAAAQEAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAOM=</data>" # Command + Shift + O
+    defaults read com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo
+    defaults read com.clipy-app.Clipy kCPYHotKeySnippetKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeySnippetKeyCombo
+    defaults read com.clipy-app.Clipy kCPYClearHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYClearHistoryKeyCombo
+    [ -e /Applications/Clipy.app ] && ( osascript -e 'quit app "Clipy"'; sleep 0.1; open -a Clipy )
 fi
 
 ##### others #####
