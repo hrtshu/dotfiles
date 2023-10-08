@@ -181,9 +181,7 @@ if command -v brew > /dev/null; then
     brew analytics off
 
     # install packages
-    TMP_BREWFILE="$(mktemp)"
-    grep -E "^(tap|brew)" "$DEST_HOME/.Brewfile" > "$TMP_BREWFILE"
-    brew bundle check -q --no-upgrade --file="$TMP_BREWFILE" > /dev/null || brew bundle install --no-lock --no-upgrade --file="$TMP_BREWFILE"
+    brew bundle check -q --no-upgrade --global > /dev/null || brew bundle install --no-upgrade --global
 
     # autoupdate
     brew install -q terminal-notifier # ensure terminal-notifier is installed
