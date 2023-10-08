@@ -41,6 +41,11 @@ function deploy_conf () {
     mkdir -p "$(dirname "$DEST_DIR/$DEST")" && ln_ "$DOTFILES_ROOT/$SRC" "$DEST_DIR/$DEST"
 }
 
+function restart_mac_app () {
+    APP_NAME="$1"
+    [ -e "/Applications/$APP_NAME.app" ] && ( osascript -e "quit app \"${APP_NAME}\""; sleep 0.1; open -a "$APP_NAME" )
+}
+
 if [ -z "${BASH_SOURCE}" ]; then
     echo "Please execute with bash" 1>&2
     return 1
@@ -125,14 +130,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults read com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo
     defaults read com.clipy-app.Clipy kCPYHotKeySnippetKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeySnippetKeyCombo
     defaults read com.clipy-app.Clipy kCPYClearHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYClearHistoryKeyCombo
-    [ -e /Applications/Clipy.app ] && ( osascript -e 'quit app "Clipy"'; sleep 0.1; open -a Clipy )
+    restart_mac_app Clipy
 
     # Magnet
     defaults write com.crowdcafe.windowmagnet expandWindowWestComboKey "<dict><key>keyCode</key><integer>123</integer><key>modifierFlags</key><integer>1572864</integer></dict>"
     defaults write com.crowdcafe.windowmagnet expandWindowEastComboKey "<dict><key>keyCode</key><integer>124</integer><key>modifierFlags</key><integer>1572864</integer></dict>"
     defaults write com.crowdcafe.windowmagnet maximizeWindowComboKey "<dict><key>keyCode</key><integer>126</integer><key>modifierFlags</key><integer>1572864</integer></dict>"
     defaults write com.crowdcafe.windowmagnet launchAtLogin -bool true
-    [ -e /Applications/Magnet.app ] && ( osascript -e 'quit app "Magnet"'; sleep 0.1; open -a Magnet )
+    restart_mac_app Magnet
 
     # Battery Monitor
     defaults write com.rockysandstudio.Battery-Diag "Welcome Arrow Shown" -int 1
@@ -140,17 +145,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add RatedBundleVersion 99
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add RatingLastLaunchBundleVersion 99
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add NewsletterLastLaunchBundleVersion 99
-    [ -e "/Applications/Battery Monitor.app" ] && ( osascript -e 'quit app "Battery Monitor"'; sleep 0.1; open -a "Battery Monitor" )
+    restart_mac_app "Battery Monitor"
 
     # MonitorControl
     defaults write me.guillaumeb.MonitorControl menuIcon -int 2 # always hide
     defaults write me.guillaumeb.MonitorControl keyboardVolume -int 3 # disable
     defaults write me.guillaumeb.MonitorControl "forceSw(DELLS2721QS426841366@2)" -int 1
-    [ -e "/Applications/MonitorControl.app" ] && ( osascript -e 'quit app "MonitorControl"'; sleep 0.1; open -a "MonitorControl" )
+    restart_mac_app "MonitorControl"
 
     # SoundSource
     defaults write com.rogueamoeba.soundsource keyboardVolume -int 1
-    [ -e "/Applications/SoundSource.app" ] && ( osascript -e 'quit app "SoundSource"'; sleep 0.1; open -a "SoundSource" )
+    restart_mac_app SoundSource
 
     # startup
     nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
