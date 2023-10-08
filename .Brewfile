@@ -80,6 +80,7 @@ cask "microsoft-excel"
 cask "microsoft-word"
 cask "microsoft-powerpoint"
 cask "microsoft-edge"
+cask "keepassxc"
 
 # mas
 mas "Speedtest by Ookla", id: 1153157709
