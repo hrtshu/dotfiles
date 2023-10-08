@@ -134,6 +134,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.crowdcafe.windowmagnet launchAtLogin -bool true
     [ -e /Applications/Magnet.app ] && ( osascript -e 'quit app "Magnet"'; sleep 0.1; open -a Magnet )
 
+    # Battery Monitor
+    defaults write com.rockysandstudio.Battery-Diag "Welcome Arrow Shown" -int 1
+    defaults write com.rockysandstudio.Battery-Diag "Low Battery Notification Percent" -string "0.198473622311828"
+    defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add RatedBundleVersion 99
+    defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add RatingLastLaunchBundleVersion 99
+    defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add NewsletterLastLaunchBundleVersion 99
+    [ -e "/Applications/Battery Monitor.app" ] && ( osascript -e 'quit app "Battery Monitor"'; sleep 0.1; open -a "Battery Monitor" )
+
     # startup
     nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
 fi
