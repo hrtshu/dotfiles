@@ -142,6 +142,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add NewsletterLastLaunchBundleVersion 99
     [ -e "/Applications/Battery Monitor.app" ] && ( osascript -e 'quit app "Battery Monitor"'; sleep 0.1; open -a "Battery Monitor" )
 
+    # MonitorControl
+    defaults write me.guillaumeb.MonitorControl menuIcon -int 2 # always hide
+    defaults write me.guillaumeb.MonitorControl keyboardVolume -int 3 # disable
+    defaults write me.guillaumeb.MonitorControl "forceSw(DELLS2721QS426841366@2)" -int 1
+    [ -e "/Applications/MonitorControl.app" ] && ( osascript -e 'quit app "MonitorControl"'; sleep 0.1; open -a "MonitorControl" )
+
     # startup
     nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
 fi
