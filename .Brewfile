@@ -81,6 +81,7 @@ cask "microsoft-word"
 cask "microsoft-powerpoint"
 cask "microsoft-edge"
 cask "keepassxc"
+cask "wireshark"
 
 # mas
 mas "Speedtest by Ookla", id: 1153157709
