@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/autoupdate"
 tap "homebrew/services"
 tap "homebrew/command-not-found"
+tap "teamookla/speedtest"
 
 brew "bash"
 brew "bash-completion"
@@ -41,6 +42,7 @@ brew "watch"
 brew "wget"
 brew "whois"
 brew "asdf"
+brew "speedtest"
 
 # optional
 brew "awscli"
