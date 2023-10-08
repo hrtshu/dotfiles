@@ -126,6 +126,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults read com.clipy-app.Clipy kCPYHotKeySnippetKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeySnippetKeyCombo
     defaults read com.clipy-app.Clipy kCPYClearHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYClearHistoryKeyCombo
     [ -e /Applications/Clipy.app ] && ( osascript -e 'quit app "Clipy"'; sleep 0.1; open -a Clipy )
+
+    # startup
+    nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
 fi
 
 ##### others #####
