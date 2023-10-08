@@ -73,6 +73,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     done
 fi
 
+##### SSH #####
+if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+    ssh-keygen -t ed25519 -f "$HOME/.ssh/id_ed25519" -N ""
+    echo set the ssh key: https://github.com/settings/keys
+fi
+
 ##### vim #####
 VIMRUNTIME_ROOT="$DEST_HOME/$VIMRUNTIME_ROOT_DIR"
 VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
