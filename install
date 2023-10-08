@@ -148,6 +148,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write me.guillaumeb.MonitorControl "forceSw(DELLS2721QS426841366@2)" -int 1
     [ -e "/Applications/MonitorControl.app" ] && ( osascript -e 'quit app "MonitorControl"'; sleep 0.1; open -a "MonitorControl" )
 
+    # SoundSource
+    defaults write com.rogueamoeba.soundsource keyboardVolume -int 1
+    [ -e "/Applications/SoundSource.app" ] && ( osascript -e 'quit app "SoundSource"'; sleep 0.1; open -a "SoundSource" )
+
     # startup
     nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
 fi
