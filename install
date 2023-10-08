@@ -144,11 +144,15 @@ if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew > /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 if command -v brew > /dev/null; then
+    # analytics
+    brew analytics off
+
+    # install packages
     TMP_BREWFILE="$(mktemp)"
     grep -E "^(tap|brew)" "$DEST_HOME/.Brewfile" > "$TMP_BREWFILE"
     brew bundle check -q --no-upgrade --file="$TMP_BREWFILE" > /dev/null || brew bundle install --no-lock --no-upgrade --file="$TMP_BREWFILE"
 
-    # homebrew-autoupdate
+    # autoupdate
     brew install -q terminal-notifier # ensure terminal-notifier is installed
     brew autoupdate status | grep -q "Autoupdate is installed and running." || brew autoupdate start --upgrade --greedy --enable-notification
     # TODO: SUDO_ASKPASS
