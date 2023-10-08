@@ -125,8 +125,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
 fi
 
-##### others #####
+##### misc #####
 [ "$DEST_HOME" == "$HOME" ] && command -v xdg-user-dirs-update > /dev/null && xdg-user-dirs-update
+
+[[ "$(git -C "$DOTFILES_ROOT" remote get-url origin)" == "https://github.com/hrtshu/dotfiles"* ]] && git -C "$DOTFILES_ROOT" remote set-url origin "git@github.com:hrtshu/dotfiles.git"
 
 if [ ! -f "$DEST_HOME/.profile_env" ]; then
     cat >> "$DEST_HOME/.profile_env" <<EOF
