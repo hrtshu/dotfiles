@@ -63,6 +63,11 @@ if [ ! -d "$DEST_HOME" ]; then
     exit 1
 fi
 
+#### directories #####
+mkdir -p "$DEST_HOME/repos"
+mkdir -p "$DEST_HOME/tmp"
+mkdir -p "$DEST_HOME/.local/bin"
+
 ##### dotfiles & config #####
 for file in "${DOTFILES_FILES[@]}"; do
     deploy_conf "$DEST_HOME" "$file"
