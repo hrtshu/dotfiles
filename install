@@ -74,8 +74,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 ##### SSH #####
-if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
-    ssh-keygen -t ed25519 -f "$HOME/.ssh/id_ed25519" -N ""
+if [ ! -f "$DEST_HOME/.ssh/id_ed25519" ]; then
+    mkdir -p "$DEST_HOME/.ssh"
+    ssh-keygen -t ed25519 -f "$DEST_HOME/.ssh/id_ed25519" -N ""
     echo set the ssh key: https://github.com/settings/keys
 fi
 
