@@ -157,10 +157,12 @@ if command -v brew > /dev/null; then
     brew bundle check -q --no-upgrade --file="$DEST_HOME/.Brewfile" > /dev/null || brew bundle install --no-upgrade --file="$DEST_HOME/.Brewfile"
 
     # autoupdate
-    brew install -q terminal-notifier # ensure terminal-notifier is installed
-    brew autoupdate status | grep -q "Autoupdate is installed and running." || brew autoupdate start --upgrade --greedy --enable-notification
-    # TODO: SUDO_ASKPASS
-    # https://github.com/Homebrew/homebrew-autoupdate/issues/40
+    brew install -q zenity # ensure installed
+    brew autoupdate delete
+    brew autoupdate start --upgrade --greedy
+    sed -i'' -e \
+        "s|^export PATH=|export SUDO_ASKPASS='$DEST_HOME/.local/bin/get-login-pass.sh'\nexport PATH=|" \
+        "$DEST_HOME/Library/Application Support/com.github.domt4.homebrew-autoupdate/brew_autoupdate"
 fi
 
 ##### shell #####
