@@ -14,6 +14,7 @@ DOTFILES_FILES=(
     .ssh/config.d/git:ssh_config_git
     .config/alacritty/alacritty.yml
     .config/git/ignore:git_ignore
+    .local/bin/get-login-pass.sh
 )
 DOTFILES_FILES_MAC=(.ssh/config.d/agent:ssh_config_agent)
 
