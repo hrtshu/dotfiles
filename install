@@ -117,6 +117,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # menubar
     defaults write com.apple.menuextra.clock ShowSeconds -int 1
 
+    # desktop
+    defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -int 0
+
     # shortcut key
     ## mission control (option + tab)
     ## ref: https://ottan.jp/posts/2016/07/system-preferences-terminal-defaults-mission-control#mission-control
