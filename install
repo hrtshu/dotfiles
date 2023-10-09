@@ -119,6 +119,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # desktop
     defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -int 0
+    defaults write com.apple.WindowManager StandardHideDesktopIcons -int 1
 
     # shortcut key
     ## mission control (option + tab)
