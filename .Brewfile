@@ -10,6 +10,7 @@ brew "binutils"
 brew "curl"
 brew "coreutils"
 brew "diffutils"
+brew "direnv"
 # brew "docker" # caskのDockerと競合するのでcaskのものを使う
 # brew "docker-completion"
 brew "dos2unix"
