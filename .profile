@@ -55,7 +55,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/make/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/file-formula/bin"
     "$HOMEBREW_PREFIX/opt/unzip/bin"
-    "$HOMEBREW_PREFIX/opt/ruby/bin"
+    # "$HOMEBREW_PREFIX/opt/ruby/bin" # asdfのrubyを優先する
     "$HOMEBREW_PREFIX/opt/whois/bin"
     "$HOMEBREW_PREFIX/opt/binutils/bin"
     "$HOMEBREW_PREFIX/opt/e2fsprogs/bin"

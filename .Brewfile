@@ -32,7 +32,7 @@ brew "make"
 brew "openssh"
 brew "openssl"
 brew "python"
-brew "ruby"
+brew "ruby" # 一応入れるが基本はasdfのものを使う
 brew "terminal-notifier"
 brew "tig"
 brew "tmux"
