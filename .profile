@@ -78,6 +78,11 @@ for SOURCE_FILE in "${SOURCE_FILES[@]}"; do
 done
 unset SOURCE_FILES
 
+##### eval #####
+# [ -x /usr/bin/keychain ] && eval $(/usr/bin/keychain --eval --agents ssh --noask)
+command -v rbenv > /dev/null && eval "$(rbenv init -)"
+command -v direnv > /dev/null && eval "$(direnv hook bash)"
+
 ##### path #####
 for P in "${PATHS[@]}"; do
     [ -d "$P" ] && NEW_PATH="$NEW_PATH:$P"
@@ -98,8 +103,3 @@ while [ -n "$old_PATH" ]; do
 done
 export PATH="${PATH#:}"
 unset old_PATH x
-
-##### eval #####
-# [ -x /usr/bin/keychain ] && eval $(/usr/bin/keychain --eval --agents ssh --noask)
-command -v rbenv > /dev/null && eval "$(rbenv init -)"
-command -v direnv > /dev/null && eval "$(direnv hook bash)"
