@@ -116,6 +116,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # menubar
     defaults write com.apple.menuextra.clock ShowSeconds -int 1
+    ## hide spotlight icon
+    defaults read com.apple.Spotlight "NSStatusItem Preferred Position Item-0" > /dev/null 2>&1 && defaults delete com.apple.Spotlight "NSStatusItem Preferred Position Item-0"
+    defaults read com.apple.Spotlight "NSStatusItem Visible Item-0" > /dev/null 2>&1 && defaults delete com.apple.Spotlight "NSStatusItem Visible Item-0"
 
     # desktop
     defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -int 0
