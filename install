@@ -134,6 +134,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # startup
     nvram StartupMute | grep -q %01 || ( echo changing startup sound to mute; sudo nvram StartupMute=%01 )
+
+    # Safari
+    defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -int 1
 fi
 
 ##### misc #####
