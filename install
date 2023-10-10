@@ -172,6 +172,12 @@ if command -v brew > /dev/null; then
         "$DEST_HOME/Library/Application Support/com.github.domt4.homebrew-autoupdate/brew_autoupdate"
 fi
 
+##### asdf #####
+ASDF="$(brew --prefix)/bin/asdf"
+"$ASDF" plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+"$ASDF" plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+"$ASDF" plugin update --all > /dev/null
+
 ##### shell #####
 if [[ "$OSTYPE" == "darwin"* && "$SHELL" != "$(brew --prefix)/bin/bash" && -x "$(brew --prefix)/bin/bash" ]]; then
     echo "changing default shell to $(brew --prefix)/bin/bash"
