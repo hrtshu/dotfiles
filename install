@@ -105,6 +105,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write -g TISRomanSwitchState -int 1 # IME switching by caps lock key
 
     # Trackpad
+    defaults write -g AppleEnableSwipeNavigateWithScrolls -int 0 # swipe to go back / forward in browser
     defaults write -g com.apple.trackpad.scaling -string 1.5 # trackpad speed
     defaults write -g com.apple.trackpad.scrolling -string 0.5881999999999999 # scroll speed
 
