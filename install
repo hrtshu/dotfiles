@@ -224,6 +224,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add RatedBundleVersion 99
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add RatingLastLaunchBundleVersion 99
     defaults write com.rockysandstudio.Battery-Diag JSDefaults -dict-add NewsletterLastLaunchBundleVersion 99
+    defaults write com.rockysandstudio.Battery-Diag "NSStatusItem Visible Item-0" -int 0 # 公式な設定はないが強制的に非表示
     restart_mac_app "Battery Monitor"
 
     # MonitorControl
