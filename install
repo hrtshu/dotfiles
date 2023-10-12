@@ -112,6 +112,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.apple.dock autohide -int 1
     defaults write com.apple.dock show-recents -int 0
     defaults write com.apple.dock tilesize -int 80
+    ## ホットコーナー
+    defaults write com.apple.dock wvous-br-corner -int 1;
+    defaults write com.apple.dock wvous-br-modifier -int 0;
     # osascript -e 'quit app "Dock"'
 
     # menubar
