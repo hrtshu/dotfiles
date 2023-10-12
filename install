@@ -215,6 +215,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.crowdcafe.windowmagnet maximizeWindowComboKey "<dict><key>keyCode</key><integer>126</integer><key>modifierFlags</key><integer>1572864</integer></dict>"
     defaults write com.crowdcafe.windowmagnet launchAtLogin -bool true
     defaults write com.crowdcafe.windowmagnet lastRatedVersion -string "99.99.99"
+    defaults write com.crowdcafe.windowmagnet "NSStatusItem Visible Item-0" -int 0 # 公式な設定はないが強制的に非表示
     restart_mac_app Magnet
 
     # Battery Monitor
