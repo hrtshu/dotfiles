@@ -121,8 +121,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # menubar
     defaults write com.apple.menuextra.clock ShowSeconds -int 1
     ## hide spotlight icon
-    defaults read com.apple.Spotlight "NSStatusItem Preferred Position Item-0" > /dev/null 2>&1 && defaults delete com.apple.Spotlight "NSStatusItem Preferred Position Item-0"
     defaults read com.apple.Spotlight "NSStatusItem Visible Item-0" > /dev/null 2>&1 && defaults delete com.apple.Spotlight "NSStatusItem Visible Item-0"
+    defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
     ## icons
     defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -int 1
     defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
