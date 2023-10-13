@@ -174,7 +174,7 @@ if command -v brew > /dev/null; then
     brew bundle check -q --no-upgrade --file="$DEST_HOME/.Brewfile" > /dev/null || brew bundle install --no-upgrade --file="$DEST_HOME/.Brewfile"
 
     # autoupdate
-    brew install -q zenity # ensure installed
+    brew install -q zenity terminal-notifier # ensure installed
     brew autoupdate delete
     brew autoupdate start --upgrade --greedy --immediate
     sed -i'' -e \
