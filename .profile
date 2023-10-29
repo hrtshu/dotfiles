@@ -19,7 +19,10 @@ export LESS="$LESS -R"
 # homebrew
 [ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
 [ "$(/usr/bin/uname -m)" = "x86_64" ] && BREW=/usr/local/bin/brew # intel
-[ -x "$BREW" ] && eval $($BREW shellenv)
+if [ -x "$BREW" ]; then
+    eval $($BREW shellenv)
+    export ORIG_PATH_WITH_BREW="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$ORIG_PATH"
+fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
