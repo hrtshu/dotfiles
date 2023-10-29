@@ -106,3 +106,6 @@ while [ -n "$old_PATH" ]; do
 done
 export PATH="${PATH#:}"
 unset old_PATH x
+
+##### alias #####
+alias asdf='PATH="$ORIG_PATH_WITH_BREW" asdf' # GNU系のコマンドが邪魔をしてasdf install ruby xxxx等が失敗することがあるためこれで回避
