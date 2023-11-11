@@ -88,6 +88,7 @@ cask "keepassxc"
 cask "wireshark"
 cask "google-drive"
 cask "onedrive"
+cask "divvy"
 
 # mas
 mas "Speedtest by Ookla", id: 1153157709

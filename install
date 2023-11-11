@@ -225,6 +225,21 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.crowdcafe.windowmagnet "NSStatusItem Visible Item-0" -int 0 # 公式な設定はないが強制的に非表示
     restart_mac_app Magnet
 
+    # Divvy
+    defaults write com.mizage.direct.Divvy defaultColumnCount -int 10
+    defaults write com.mizage.direct.Divvy defaultRowCount -int 10
+    defaults write com.mizage.direct.Divvy lastColumnCount -int 10
+    defaults write com.mizage.direct.Divvy lastRowCount -int 10
+    defaults write com.mizage.direct.Divvy defaultScreenMarginBottom -int 0
+    defaults write com.mizage.direct.Divvy defaultScreenMarginLeft -int 1 # ステージマネージャー用のスペース
+    defaults write com.mizage.direct.Divvy defaultScreenMarginRight -int 46 # サイドバー用のスペース
+    defaults write com.mizage.direct.Divvy defaultScreenMarginTop -int 0
+    defaults write com.mizage.direct.Divvy enableAcceleration -int 1
+    defaults write com.mizage.direct.Divvy enableMargins -int 1
+    defaults write com.mizage.direct.Divvy shortcuts "<data>YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGpCwwUKywzPD1GVSRudWxs0g0ODxNaTlMub2JqZWN0c1YkY2xhc3OjEBESgAKABYAHgAjdFRYXGBkOGhscHR4fICEiIyQlJiIlISgpIypYc2l6ZVJvd3NfEA9zZWxlY3Rpb25FbmRSb3dfEBFzZWxlY3Rpb25TdGFydFJvd1pzdWJkaXZpZGVkVmdsb2JhbF8QEnNlbGVjdGlvbkVuZENvbHVtbldlbmFibGVkW3NpemVDb2x1bW5zV25hbWVLZXlca2V5Q29tYm9Db2RlXxAUc2VsZWN0aW9uU3RhcnRDb2x1bW5da2V5Q29tYm9GbGFncxAKEAkQAAgJgAQJgAMQfhIAmAAAUNItLi8wWiRjbGFzc25hbWVYJGNsYXNzZXNYU2hvcnRjdXSiMTJYU2hvcnRjdXRYTlNPYmplY3TdFRYXGBkOGhscHR4fICEiIyQlJjclITk6IzsICYAEEAQJgAYQexIAmAAAUN0VFhcYGQ4aGxwdHh8gISIjJCUmIiUhOUNERQgJgAQJgAYQfBAFEgCYAADSLS5HSF5OU011dGFibGVBcnJheaNHSUpXTlNBcnJheVhOU09iamVjdAAIABEAGgAkACkAMgA3AEkATABRAFMAXQBjAGgAcwB6AH4AgACCAIQAhgChAKoAvADQANsA4gD3AP8BCwETASABNwFFAUcBSQFLAUwBTQFPAVABUgFUAVkBWgFfAWoBcwF8AX8BiAGRAawBrQGuAbABsgGzAbUBtwG8Ab0B2AHZAdoB3AHdAd8B4QHjAegB7QH8AgACCAAAAAAAAAIBAAAAAAAAAEsAAAAAAAAAAAAAAAAAAAIR</data>"
+    defaults write com.mizage.direct.Divvy "NSStatusItem Visible Item-0" -int 0 # 公式な設定はないが強制的に非表示
+    restart_mac_app Divvy
+
     # Battery Monitor
     defaults write com.rockysandstudio.Battery-Diag "Welcome Arrow Shown" -int 1
     defaults write com.rockysandstudio.Battery-Diag "Low Battery Notification Percent" -string "0.198473622311828"
