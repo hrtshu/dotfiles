@@ -10,13 +10,13 @@ DOTFILES_FILES=(
     .tigrc
     .asdfrc
     .Brewfile
-    .ssh/config:ssh_config
-    .ssh/config.d/git:ssh_config_git
+    .ssh/config:ssh_config:600
+    .ssh/config.d/git:ssh_config_git:600
     .config/alacritty/alacritty.yml
     .config/git/ignore:git_ignore
-    .local/bin/get-login-pass.sh
+    .local/bin/get-login-pass.sh::700
 )
-DOTFILES_FILES_MAC=(.ssh/config.d/agent:ssh_config_agent)
+DOTFILES_FILES_MAC=(.ssh/config.d/agent:ssh_config_agent:600)
 
 VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
@@ -36,9 +36,11 @@ function deploy_conf () {
     IFS=, ARG=(${2//:/,}) # $2を:で分割して配列に格納
     DEST="${ARG[0]}"
     SRC="${ARG[1]}"
+    PERM="${ARG[2]}"
 
     [ -z "$SRC" ] && SRC="$(basename $DEST)"
 
+    [ -n "$PERM" ] && chmod "$PERM" "$DOTFILES_ROOT/$SRC"
     mkdir -p "$(dirname "$DEST_DIR/$DEST")" && ln_ "$DOTFILES_ROOT/$SRC" "$DEST_DIR/$DEST"
 }
 
