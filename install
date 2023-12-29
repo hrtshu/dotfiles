@@ -12,7 +12,7 @@ DOTFILES_FILES=(
     .Brewfile
     .ssh/config:ssh_config:600
     .ssh/config.d/git:ssh_config_git:600
-    .config/alacritty/alacritty.yml
+    .config/alacritty/alacritty.toml
     .config/git/ignore:git_ignore
     .local/bin/get-login-pass.sh::700
 )
