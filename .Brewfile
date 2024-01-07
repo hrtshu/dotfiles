@@ -46,6 +46,7 @@ brew "whois"
 brew "asdf"
 brew "speedtest"
 brew "rsync"
+brew "pv"
 
 # optional
 brew "awscli"
