@@ -45,6 +45,7 @@ brew "wget"
 brew "whois"
 brew "asdf"
 brew "speedtest"
+brew "rsync"
 
 # optional
 brew "awscli"
