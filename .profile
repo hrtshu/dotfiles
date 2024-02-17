@@ -15,6 +15,7 @@ export EDITOR=vim
 export LESS="$LESS -R"
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 [[ "$OSTYPE" == "darwin"* ]] && export BASH_SILENCE_DEPRECATION_WARNING=1
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # homebrew
 [ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
