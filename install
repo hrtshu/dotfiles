@@ -189,6 +189,7 @@ ASDF="$(brew --prefix)/bin/asdf"
 "$ASDF" plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git > /dev/null
 "$ASDF" plugin add ruby https://github.com/asdf-vm/asdf-ruby.git > /dev/null
 "$ASDF" plugin add golang https://github.com/asdf-community/asdf-golang.git > /dev/null
+"$ASDF" plugin add rust https://github.com/asdf-community/asdf-rust.git > /dev/null
 "$ASDF" plugin update --all > /dev/null
 
 ##### shell #####
