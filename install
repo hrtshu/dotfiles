@@ -22,6 +22,9 @@ VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
 VIMRUNTIME_INSTALLER_FILE="install_awesome_vimrc.sh"
 
+AUTOMATIONS_REPO="https://github.com/hrtshu/automations.git"
+AUTOMATIONS_ROOT_DIR="automations"
+
 function ln_ () {
     src="$1"
     dest="$2"
@@ -179,6 +182,7 @@ if command -v brew > /dev/null; then
     brew install -q zenity terminal-notifier # ensure installed
     brew autoupdate delete
     brew autoupdate start --upgrade --immediate
+    # TODO: get-login-pass.sh を automations に移行する
     sed -i'' -e \
         "s|^export PATH=|export SUDO_ASKPASS='$DEST_HOME/.local/bin/get-login-pass.sh'\nexport PATH=|" \
         "$DEST_HOME/Library/Application Support/com.github.domt4.homebrew-autoupdate/brew_autoupdate"
@@ -199,6 +203,18 @@ if [[ "$OSTYPE" == "darwin"* && "$SHELL" != "$(brew --prefix)/bin/bash" && -x "$
         echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells
     fi
     sudo chsh -s "$(brew --prefix)/bin/bash" "$USER"
+fi
+
+##### automations #####
+AUTOMATIONS_ROOT="$DEST_HOME/$AUTOMATIONS_ROOT_DIR"
+echo $AUTOMATIONS_ROOT
+if [ ! -e "$AUTOMATIONS_ROOT" ]; then
+    if command -v git > /dev/null; then
+        git clone --depth=1 "$AUTOMATIONS_REPO" "$AUTOMATIONS_ROOT"
+        "$AUTOMATIONS_ROOT/install"
+    else
+        echo "automations installation was skipped (git is not installed)." 1>&2
+    fi
 fi
 
 ##### Mac GUI app #####
