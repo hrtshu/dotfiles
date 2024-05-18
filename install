@@ -19,10 +19,12 @@ DOTFILES_FILES=(
 DOTFILES_FILES_MAC=(.ssh/config.d/agent:ssh_config_agent:600)
 
 VIMRUNTIME_REPO="https://github.com/hrtshu/vimrc.git"
+VIMRUNTIME_REPO_SSH="git@github.com:hrtshu/vimrc.git"
 VIMRUNTIME_ROOT_DIR=".vim_runtime"
 VIMRUNTIME_INSTALLER_FILE="install_awesome_vimrc.sh"
 
 AUTOMATIONS_REPO="https://github.com/hrtshu/automations.git"
+AUTOMATIONS_REPO_SSH="git@github.com:hrtshu/automations.git"
 AUTOMATIONS_ROOT_DIR="automations"
 
 function ln_ () {
@@ -97,6 +99,7 @@ VIMRUNTIME_INSTALLER="$VIMRUNTIME_ROOT/$VIMRUNTIME_INSTALLER_FILE"
 if [ ! -e "$VIMRUNTIME_ROOT" ]; then
     if command -v git > /dev/null; then
         git clone --depth=1 "$VIMRUNTIME_REPO" "$VIMRUNTIME_ROOT"
+        git -C "$VIMRUNTIME_ROOT" remote set-url --push origin "$VIMRUNTIME_REPO_SSH"
         . "$VIMRUNTIME_INSTALLER"
     else
         echo "vimrc installation was skipped (git is not installed)." 1>&2
@@ -207,10 +210,10 @@ fi
 
 ##### automations #####
 AUTOMATIONS_ROOT="$DEST_HOME/$AUTOMATIONS_ROOT_DIR"
-echo $AUTOMATIONS_ROOT
 if [ ! -e "$AUTOMATIONS_ROOT" ]; then
     if command -v git > /dev/null; then
-        git clone --depth=1 "$AUTOMATIONS_REPO" "$AUTOMATIONS_ROOT"
+        git clone "$AUTOMATIONS_REPO" "$AUTOMATIONS_ROOT"
+        git -C "$AUTOMATIONS_ROOT" remote set-url --push origin "$AUTOMATIONS_REPO_SSH"
         "$AUTOMATIONS_ROOT/install"
     else
         echo "automations installation was skipped (git is not installed)." 1>&2
