@@ -214,10 +214,12 @@ if [ ! -e "$AUTOMATIONS_ROOT" ]; then
     if command -v git > /dev/null; then
         git clone "$AUTOMATIONS_REPO" "$AUTOMATIONS_ROOT"
         git -C "$AUTOMATIONS_ROOT" remote set-url --push origin "$AUTOMATIONS_REPO_SSH"
-        "$AUTOMATIONS_ROOT/install"
     else
         echo "automations installation was skipped (git is not installed)." 1>&2
     fi
+fi
+if [ -e "$AUTOMATIONS_ROOT" ]; then
+    git -C "$AUTOMATIONS_ROOT" pull > /dev/null && "$AUTOMATIONS_ROOT/install"
 fi
 
 ##### Mac GUI app #####
