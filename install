@@ -209,17 +209,19 @@ if [[ "$OSTYPE" == "darwin"* && "$SHELL" != "$(brew --prefix)/bin/bash" && -x "$
 fi
 
 ##### automations #####
-AUTOMATIONS_ROOT="$DEST_HOME/$AUTOMATIONS_ROOT_DIR"
-if [ ! -e "$AUTOMATIONS_ROOT" ]; then
-    if command -v git > /dev/null; then
-        git clone "$AUTOMATIONS_REPO" "$AUTOMATIONS_ROOT"
-        git -C "$AUTOMATIONS_ROOT" remote set-url --push origin "$AUTOMATIONS_REPO_SSH"
-    else
-        echo "automations installation was skipped (git is not installed)." 1>&2
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    AUTOMATIONS_ROOT="$DEST_HOME/$AUTOMATIONS_ROOT_DIR"
+    if [ ! -e "$AUTOMATIONS_ROOT" ]; then
+        if command -v git > /dev/null; then
+            git clone "$AUTOMATIONS_REPO" "$AUTOMATIONS_ROOT"
+            git -C "$AUTOMATIONS_ROOT" remote set-url --push origin "$AUTOMATIONS_REPO_SSH"
+        else
+            echo "automations installation was skipped (git is not installed)." 1>&2
+        fi
     fi
-fi
-if [ -e "$AUTOMATIONS_ROOT" ]; then
-    git -C "$AUTOMATIONS_ROOT" pull > /dev/null && "$AUTOMATIONS_ROOT/install"
+    if [ -e "$AUTOMATIONS_ROOT" ]; then
+        git -C "$AUTOMATIONS_ROOT" pull > /dev/null && "$AUTOMATIONS_ROOT/install"
+    fi
 fi
 
 ##### Mac GUI app #####
