@@ -235,7 +235,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # Clipy
     defaults write com.clipy-app.Clipy loginItem -int 1 # この設定を付与した後にClipyを一度も起動しないと、おそらくログイン項目に追加されない
+    defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 100
     defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInlineKey -int 10
+    defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInsideFolderKey -int 20
+    defaults write com.clipy-app.Clipy kCPYPrefMaxMenuItemTitleLengthKey -int 70
     defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int 0
     defaults write com.clipy-app.Clipy kCPYBetaDeleteHistory -int 1
     defaults write com.clipy-app.Clipy kCPYPrefStoreTypesKey "<dict><key>Filenames</key><true/><key>PDF</key><true/><key>RTF</key><true/><key>RTFD</key><true/><key>String</key><true/><key>TIFF</key><true/><key>URL</key><true/></dict>"
