@@ -242,6 +242,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int 0
     defaults write com.clipy-app.Clipy kCPYBetaDeleteHistory -int 1
     defaults write com.clipy-app.Clipy kCPYCollectCrashReport -int 0
+    defaults write com.clipy-app.Clipy kCPYBetaObserveScreenshot -int 1
     defaults write com.clipy-app.Clipy kCPYPrefStoreTypesKey "<dict><key>Filenames</key><true/><key>PDF</key><true/><key>RTF</key><true/><key>RTFD</key><true/><key>String</key><true/><key>TIFF</key><true/><key>URL</key><true/></dict>"
     defaults write com.clipy-app.Clipy kCPYHotKeyMainKeyCombo "<data>YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGjCwwVVSRudWxs1A0ODxAREhMUViRjbGFzc1ltb2RpZmllcnNXa2V5Q29kZV8QEGRvdWJsZWRNb2RpZmllcnOAAhEDABAfCNIWFxgZWiRjbGFzc25hbWVYJGNsYXNzZXNfEA9NYWduZXQuS2V5Q29tYm+iGhtfEA9NYWduZXQuS2V5Q29tYm9YTlNPYmplY3QIERokKTI3SUxRU1ddZm13f5KUl5man6qzxcjaAAAAAAAAAQEAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAOM=</data>" # Command + Shift + O
     defaults read com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo
