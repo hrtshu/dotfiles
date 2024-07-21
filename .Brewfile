@@ -62,6 +62,7 @@ brew "nmap"
 brew "smartmontools"
 brew "socat"
 brew "sqlite"
+brew "swift-format"
 brew "tor"
 brew "youtube-dl"
 
