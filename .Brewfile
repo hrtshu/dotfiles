@@ -31,6 +31,7 @@ brew "kubernetes-cli"
 brew "make"
 brew "openssh"
 brew "openssl"
+brew "p7zip"
 brew "python"
 brew "ruby" # 一応入れるが基本はasdfのものを使う
 brew "terminal-notifier"
