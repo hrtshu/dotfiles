@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/autoupdate"
 tap "homebrew/services"
 tap "homebrew/command-not-found"
+tap "hrtshu/tap"
 
 brew "bash"
 brew "bash-completion"
@@ -101,3 +102,6 @@ mas "AS Timer", id: 512464723
 mas "Battery Monitor: Health, Info", id: 836505650
 mas "Stickies - Sticky notes app", id: 1572061218
 mas "Magnet", id: 441258766
+
+# my tools
+brew "hrtshu/tap/window-placer"
