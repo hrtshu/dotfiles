@@ -241,6 +241,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.clipy-app.Clipy kCPYPrefMaxMenuItemTitleLengthKey -int 70
     defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int 0
     defaults write com.clipy-app.Clipy kCPYBetaDeleteHistory -int 1
+    defaults read com.clipy-app.Clipy kCPYBetaDeleteHistoryModifier > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYBetaDeleteHistoryModifier
+    defaults write com.clipy-app.Clipy kCPYBetaPastePlainText -int 1
+    defaults write com.clipy-app.Clipy kCPYBetaPastePlainTextModifier -int 2
     defaults write com.clipy-app.Clipy kCPYCollectCrashReport -int 0
     defaults write com.clipy-app.Clipy kCPYBetaObserveScreenshot -int 1
     defaults write com.clipy-app.Clipy kCPYPrefStoreTypesKey "<dict><key>Filenames</key><true/><key>PDF</key><true/><key>RTF</key><true/><key>RTFD</key><true/><key>String</key><true/><key>TIFF</key><true/><key>URL</key><true/></dict>"
