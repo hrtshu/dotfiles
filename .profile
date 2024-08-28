@@ -70,6 +70,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/curl/bin"
     "$HOMEBREW_PREFIX/opt/python@3/libexec/bin"
     "$HOMEBREW_PREFIX/opt/mysql@8.0/bin"
+    "$HOMEBREW_PREFIX/opt/lsof/bin"
     "$HOME/Library/Python/3.9/bin"
     "$HOME/.nodebrew/current/bin"
     "$HOME/.cargo/bin"
