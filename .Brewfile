@@ -71,6 +71,7 @@ brew "tor"
 brew "youtube-dl"
 
 # cask
+cask "arc"
 cask "clipy"
 cask "monitorcontrol"
 cask "switchresx"
