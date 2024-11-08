@@ -75,7 +75,6 @@ PATHS=(
     "$HOME/.nodebrew/current/bin"
     "$HOME/.cargo/bin"
     "$GOPATH/bin"
-    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin"
 )
 
