@@ -114,3 +114,4 @@ unset old_PATH x
 # GNU系のコマンドが邪魔をしてasdf install ruby xxxx等が失敗することがあるためこれで回避
 # asdfのrustcが使えるように $HOME/.asdf/shims/ を追加(rustcはyjitを有効にしたrubyのインストールで必要)
 alias asdf='PATH="$HOME/.asdf/shims/:$ORIG_PATH_WITH_BREW" RUBY_CONFIGURE_OPTS=--enable-yjit asdf'
+alias bundle='PATH="$HOME/.asdf/shims/:$ORIG_PATH_WITH_BREW" bundle'
