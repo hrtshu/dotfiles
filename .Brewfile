@@ -107,3 +107,4 @@ mas "Magnet", id: 441258766
 
 # my tools
 brew "hrtshu/tap/window-placer"
+brew "hrtshu/tap/focus-sidebar"
