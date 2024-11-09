@@ -183,6 +183,7 @@ if command -v brew > /dev/null; then
     brew analytics off
 
     # install packages
+    brew update -q
     brew bundle check -q --no-upgrade --file="$DEST_HOME/.Brewfile" > /dev/null || brew bundle install --no-upgrade --file="$DEST_HOME/.Brewfile"
 
     # autoupdate
