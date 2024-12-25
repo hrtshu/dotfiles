@@ -98,6 +98,7 @@ cask "wireshark"
 cask "google-drive"
 cask "onedrive"
 cask "divvy"
+cask "hhkb-studio"
 
 # mas
 mas "Speedtest by Ookla", id: 1153157709
