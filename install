@@ -112,6 +112,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write -g _HIHideMenuBar -int 1
     defaults write -g TISRomanSwitchState -int 1 # IME switching by caps lock key
 
+    # Mouse # 現在この設定はHHKB Studioに最適化
+    defaults write -g com.apple.mouse.scaling -string 0.6875
+    defaults write -g com.apple.scrollwheel.scaling -int 0
+
     # Trackpad
     defaults write -g AppleEnableSwipeNavigateWithScrolls -int 0 # swipe to go back / forward in browser
     defaults write -g com.apple.trackpad.scaling -string 1.5 # trackpad speed
