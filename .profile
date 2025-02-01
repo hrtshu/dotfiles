@@ -50,6 +50,7 @@ PATHS=(
     "$HOME/.local/bin"
     "$HOME/.rd/bin"
     "$HOME/.orbstack/bin"
+    "$HOME/.lmstudio/bin"
     "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
