@@ -97,7 +97,6 @@ cask "keepassxc"
 cask "wireshark"
 cask "google-drive"
 cask "onedrive"
-cask "divvy"
 cask "hhkb-studio"
 
 # mas
