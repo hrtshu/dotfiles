@@ -36,7 +36,6 @@ fi
 SOURCE_FILES=(
     "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
     "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-    "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
     "$HOME/.cargo/env"
     "$HOME/.nvm/nvm.sh"
     "$HOME/.nvm/bash_completion"
@@ -48,6 +47,7 @@ SOURCE_FILES=(
 PATHS=(
     "$HOME/bin"
     "$HOME/.local/bin"
+    "$HOME/.asdf/shims"
     "$HOME/.rd/bin"
     "$HOME/.orbstack/bin"
     "$HOME/.lmstudio/bin"
