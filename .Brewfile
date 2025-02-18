@@ -52,6 +52,7 @@ brew "asdf"
 brew "teamookla/speedtest/speedtest"
 brew "rsync"
 brew "pv"
+brew "bufbuild/buf/buf"
 
 # optional
 brew "awscli"
