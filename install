@@ -90,6 +90,7 @@ fi
 if [ ! -f "$DEST_HOME/.ssh/id_ed25519" ]; then
     mkdir -p "$DEST_HOME/.ssh"
     ssh-keygen -t ed25519 -f "$DEST_HOME/.ssh/id_ed25519" -N ""
+    cat "$DEST_HOME/.ssh/id_ed25519.pub"
     echo set the ssh key: https://github.com/settings/keys
 fi
 
