@@ -35,7 +35,7 @@ fi
 
 SOURCE_FILES=(
     "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-    "$HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+    "$HOMEBREW_REPOSITORY/Library/Homebrew/command-not-found/handler.sh"
     "$HOME/.cargo/env"
     "$HOME/.nvm/nvm.sh"
     "$HOME/.nvm/bash_completion"
