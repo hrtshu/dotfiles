@@ -18,8 +18,8 @@ export LESS="$LESS -R"
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # homebrew
-[ "$(/usr/bin/uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
-[ "$(/usr/bin/uname -m)" = "x86_64" ] && BREW=/usr/local/bin/brew # intel
+[ "$(uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
+[ "$(uname -m)" = "x86_64" ] && BREW=/usr/local/bin/brew # intel
 if [ -x "$BREW" ]; then
     eval $($BREW shellenv)
     export ORIG_PATH_WITH_BREW="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$ORIG_PATH"
