@@ -1,7 +1,4 @@
-tap "homebrew/bundle"
 tap "homebrew/autoupdate"
-tap "homebrew/services"
-tap "homebrew/command-not-found"
 tap "hrtshu/tap"
 
 brew "bash"
