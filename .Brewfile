@@ -1,5 +1,7 @@
 tap "homebrew/autoupdate"
 tap "hrtshu/tap"
+tap "jakehilborn/jakehilborn"
+tap "teamookla/speedtest"
 
 brew "bash"
 brew "bash-completion"
