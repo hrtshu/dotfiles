@@ -27,6 +27,8 @@ AUTOMATIONS_REPO="https://github.com/hrtshu/automations.git"
 AUTOMATIONS_REPO_SSH="git@github.com:hrtshu/automations.git"
 AUTOMATIONS_ROOT_DIR="automations"
 
+CLONE_REPOS=(my-chrome-work-booster smoothscroll)
+
 function ln_ () {
     src="$1"
     dest="$2"
@@ -239,6 +241,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         git -C "$AUTOMATIONS_ROOT" pull > /dev/null && "$AUTOMATIONS_ROOT/install"
     fi
 fi
+
+##### clone repos #####
+for repo in "${CLONE_REPOS[@]}"; do
+    if [ ! -e "$DEST_HOME/repos/$repo" ]; then
+        git clone "https://github.com/hrtshu/$repo.git" "$DEST_HOME/repos/$repo"
+        git -C "$DEST_HOME/repos/$repo" remote set-url --push origin "git@github.com:hrtshu/$repo.git"
+    fi
+done
 
 ##### Mac GUI app #####
 if [[ "$OSTYPE" == "darwin"* ]]; then
