@@ -70,7 +70,6 @@ brew "socat"
 brew "sqlite"
 brew "swift-format"
 brew "tor"
-brew "youtube-dl"
 
 # cask
 cask "arc"
