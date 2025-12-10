@@ -304,4 +304,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # SoundSource
     defaults write com.rogueamoeba.soundsource keyboardVolume -int 1
     restart_mac_app SoundSource
+
+    # window-placer
+    command -v brew > /dev/null && brew services restart window-placer
 fi
