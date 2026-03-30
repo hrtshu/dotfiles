@@ -15,6 +15,7 @@ brew "jakehilborn/jakehilborn/displayplacer"
 # brew "docker" # caskのDockerと競合するのでcaskのものを使う
 # brew "docker-completion"
 brew "dos2unix"
+brew "fdupes"
 brew "ffmpeg"
 brew "findutils"
 brew "gcc"
