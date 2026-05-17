@@ -258,7 +258,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     }
 
     # Clipy
-    defaults write com.clipy-app.Clipy loginItem -int 1 # この設定を付与した後にClipyを一度も起動しないと、おそらくログイン項目に追加されない
+    # defaults write com.clipy-app.Clipy loginItem -int 1 # この設定を付与した後にClipyを一度も起動しないと、おそらくログイン項目に追加されない
     defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 100
     defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInlineKey -int 10
     defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInsideFolderKey -int 20
@@ -276,6 +276,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults read com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYHotKeyHistoryKeyCombo
     defaults read com.clipy-app.Clipy kCPYClearHistoryKeyCombo > /dev/null 2>&1 && defaults delete com.clipy-app.Clipy kCPYClearHistoryKeyCombo
     restart_mac_app Clipy
+
+    # Maccy
+    defaults write org.p0deje.Maccy pasteByDefault -int 1
+    defaults write org.p0deje.Maccy showInStatusBar -int 0
+    defaults write org.p0deje.Maccy KeyboardShortcuts_popup -string "{\"carbonKeyCode\":31,\"carbonModifiers\":768}"
+    restart_mac_app Maccy
 
     # Magnet
     defaults write com.crowdcafe.windowmagnet expandWindowWestComboKey "<dict><key>keyCode</key><integer>123</integer><key>modifierFlags</key><integer>1572864</integer></dict>"
