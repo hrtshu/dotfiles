@@ -74,7 +74,6 @@ brew "tor"
 
 # cask
 cask "arc"
-cask "clipy"
 cask "maccy"
 cask "monitorcontrol"
 cask "switchresx"
