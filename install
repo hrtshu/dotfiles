@@ -192,6 +192,8 @@ if command -v brew > /dev/null; then
     # analytics
     brew analytics off
 
+    brew trust hrtshu/tap domt4/autoupdate bufbuild/buf teamookla/speedtest/speedtest
+
     # install packages
     brew update -q
     brew bundle check -q --no-upgrade --file="$DEST_HOME/.Brewfile" > /dev/null || brew bundle install --no-upgrade --file="$DEST_HOME/.Brewfile"
