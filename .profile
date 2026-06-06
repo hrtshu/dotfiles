@@ -23,6 +23,7 @@ export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 if [ -x "$BREW" ]; then
     eval $($BREW shellenv)
     export ORIG_PATH_WITH_BREW="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$ORIG_PATH"
+    export HOMEBREW_REQUIRE_TAP_TRUST=1
 fi
 
 # if running bash
