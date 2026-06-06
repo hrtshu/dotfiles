@@ -71,6 +71,7 @@ brew "socat"
 brew "sqlite"
 brew "swift-format"
 brew "tor"
+brew "mas"
 
 # cask
 cask "arc"
