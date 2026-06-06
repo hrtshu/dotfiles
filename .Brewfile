@@ -1,4 +1,4 @@
-tap "homebrew/autoupdate"
+tap "domt4/autoupdate"
 tap "hrtshu/tap"
 tap "teamookla/speedtest"
 tap "bufbuild/buf"
