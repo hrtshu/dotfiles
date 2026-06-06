@@ -1,6 +1,5 @@
 tap "homebrew/autoupdate"
 tap "hrtshu/tap"
-tap "jakehilborn/jakehilborn"
 tap "teamookla/speedtest"
 tap "bufbuild/buf"
 
@@ -11,7 +10,7 @@ brew "curl"
 brew "coreutils"
 brew "diffutils"
 brew "direnv"
-brew "jakehilborn/jakehilborn/displayplacer"
+brew "displayplacer"
 # brew "docker" # caskのDockerと競合するのでcaskのものを使う
 # brew "docker-completion"
 brew "dos2unix"
