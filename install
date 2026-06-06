@@ -315,4 +315,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # window-placer
     command -v brew > /dev/null && brew services restart window-placer
+
+    # Alfred
+    defaults write com.runningwithcrayons.Alfred-Preferences "NSStatusItem Visible Item-0" -int 0 # 公式な設定はないが強制的に非表示
+
+    # NextAI Translator
+    defaults write xyz.yetone.apps.openai-translator "NSStatusItem Visible Item-0" -int 0 # 公式な設定はないが強制的に非表示
 fi
