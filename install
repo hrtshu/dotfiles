@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ "$OSTYPE" == "darwin"* && "$(uname -m)" = "x86_64" ]]; then
+    echo "error: Intel Mac (x86_64) detected. This dotfiles setup is primarily maintained for Apple Silicon (arm64)." 1>&2
+    exit 1
+fi
+
 DOTFILES_ROOT="$(cd $(dirname $0) && pwd)"
 DOTFILES_FILES=(
     .profile
@@ -37,7 +42,7 @@ function ln_ () {
 
     # busyboxのlnコマンドは-iオプションをサポートしていない
     if ln --help 2>&1 | grep -q '\-i'; then
-    ln -i -s "$src" "$dest"
+        ln -i -s "$src" "$dest"
     else
         ln -s "$src" "$dest"
     fi
