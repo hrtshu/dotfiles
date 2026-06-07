@@ -263,6 +263,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write org.p0deje.Maccy pasteByDefault -int 1
     defaults write org.p0deje.Maccy showInStatusBar -int 0
     defaults write org.p0deje.Maccy KeyboardShortcuts_popup -string "{\"carbonKeyCode\":31,\"carbonModifiers\":768}"
+    defaults write org.p0deje.Maccy SUEnableAutomaticChecks -int 1
     restart_mac_app Maccy
 
     # Magnet
