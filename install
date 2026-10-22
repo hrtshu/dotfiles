@@ -135,7 +135,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write -g com.apple.trackpad.scrolling -string 0.5881999999999999 # scroll speed
 
     # Dock
-    defaults write com.apple.dock autohide -int 1
+    defaults write com.apple.dock orientation -string right
+    defaults write com.apple.dock autohide -int 0
     defaults write com.apple.dock show-recents -int 0
     defaults write com.apple.dock tilesize -int 80
     ## ホットコーナー
