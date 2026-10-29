@@ -111,4 +111,3 @@ mas "Magnet", id: 441258766
 # my tools
 brew "hrtshu/tap/window-placer"
 brew "hrtshu/tap/chrome-tabbar-shortcut"
-cask "hrtshu/tap/focus-sidebar"
