@@ -35,8 +35,10 @@ brew "make"
 brew "mysql-client"
 brew "openssh"
 brew "openssl"
+brew "readline" # asdf-pythonのビルドに必要
+brew "xz" # asdf-pythonのビルドに必要
+brew "zlib" # asdf-pythonのビルドに必要
 brew "p7zip"
-brew "python"
 brew "ruby" # 一応入れるが基本はasdfのものを使う
 brew "terminal-notifier"
 brew "tig"
