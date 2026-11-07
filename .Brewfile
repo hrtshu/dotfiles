@@ -35,11 +35,11 @@ brew "make"
 brew "mysql-client"
 brew "openssh"
 brew "openssl"
-brew "readline" # asdf-pythonのビルドに必要
-brew "xz" # asdf-pythonのビルドに必要
-brew "zlib" # asdf-pythonのビルドに必要
+brew "readline" # pythonのビルドに必要
+brew "xz" # pythonのビルドに必要
+brew "zlib" # pythonのビルドに必要
 brew "p7zip"
-brew "ruby" # 一応入れるが基本はasdfのものを使う
+brew "ruby" # 一応入れるが基本はmiseのものを使う
 brew "terminal-notifier"
 brew "tig"
 brew "tmux"
@@ -51,7 +51,7 @@ brew "vim"
 brew "watch"
 brew "wget"
 brew "whois"
-brew "asdf"
+brew "mise"
 brew "teamookla/speedtest/speedtest"
 brew "rsync"
 brew "pv"

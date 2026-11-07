@@ -13,7 +13,6 @@ DOTFILES_FILES=(
     .gitconfig
     .tmux.conf
     .tigrc
-    .asdfrc
     .Brewfile
     .ssh/config:ssh_config:600
     .ssh/config.d/git:ssh_config_git:600
@@ -214,16 +213,10 @@ if command -v brew > /dev/null; then
         "$DEST_HOME/Library/Application Support/com.github.domt4.homebrew-autoupdate/brew_autoupdate"
 fi
 
-##### asdf #####
-if command -v brew > /dev/null; then
-    ASDF="$(brew --prefix)/bin/asdf"
-    "$ASDF" plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git > /dev/null
-    "$ASDF" plugin add ruby https://github.com/asdf-vm/asdf-ruby.git > /dev/null
-    "$ASDF" plugin add python https://github.com/danhper/asdf-python.git > /dev/null
-    "$ASDF" plugin add golang https://github.com/asdf-community/asdf-golang.git > /dev/null
-    "$ASDF" plugin add rust https://github.com/asdf-community/asdf-rust.git > /dev/null
-    "$ASDF" plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git > /dev/null
-    "$ASDF" plugin update --all > /dev/null
+##### mise #####
+# バージョンは ~/.tool-versions で管理する（mise がそのまま読む）
+if command -v mise > /dev/null && [ -f "$DEST_HOME/.tool-versions" ]; then
+    (cd "$DEST_HOME" && mise install --yes)
 fi
 
 ##### shell #####

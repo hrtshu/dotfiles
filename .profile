@@ -15,7 +15,6 @@ export EDITOR=vim
 export LESS="$LESS -R"
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 [[ "$OSTYPE" == "darwin"* ]] && export BASH_SILENCE_DEPRECATION_WARNING=1
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # homebrew
 [ "$(uname -m)" = "arm64" ] && BREW=/opt/homebrew/bin/brew # apple silicon
@@ -48,7 +47,7 @@ SOURCE_FILES=(
 PATHS=(
     "$HOME/bin"
     "$HOME/.local/bin"
-    "$HOME/.asdf/shims"
+    "$HOME/.local/share/mise/shims"
     "$HOME/.rd/bin"
     "$HOME/.orbstack/bin"
     "$HOME/.lmstudio/bin"
@@ -63,7 +62,7 @@ PATHS=(
     "$HOMEBREW_PREFIX/opt/make/libexec/gnubin"
     "$HOMEBREW_PREFIX/opt/file-formula/bin"
     "$HOMEBREW_PREFIX/opt/unzip/bin"
-    # "$HOMEBREW_PREFIX/opt/ruby/bin" # asdfのrubyを優先する
+    # "$HOMEBREW_PREFIX/opt/ruby/bin" # miseのrubyを優先する
     "$HOMEBREW_PREFIX/opt/whois/bin"
     "$HOMEBREW_PREFIX/opt/binutils/bin"
     "$HOMEBREW_PREFIX/opt/e2fsprogs/bin"
@@ -114,7 +113,7 @@ export PATH="${PATH#:}"
 unset old_PATH x
 
 ##### alias #####
-# GNU系のコマンドが邪魔をしてasdf install ruby xxxx等が失敗することがあるためこれで回避
-# asdfのrustcが使えるように $HOME/.asdf/shims/ を追加(rustcはyjitを有効にしたrubyのインストールで必要)
-alias asdf='PATH="$HOME/.asdf/shims/:$ORIG_PATH_WITH_BREW" RUBY_CONFIGURE_OPTS=--enable-yjit asdf'
-alias bundle='PATH="$HOME/.asdf/shims/:$ORIG_PATH_WITH_BREW" bundle'
+# GNU系のコマンドが邪魔をしてmise install ruby xxxx等が失敗することがあるためこれで回避
+# miseのrustcが使えるように $HOME/.local/share/mise/shims を追加(rustcはyjitを有効にしたrubyのインストールで必要)
+alias mise='PATH="$HOME/.local/share/mise/shims:$ORIG_PATH_WITH_BREW" RUBY_CONFIGURE_OPTS=--enable-yjit mise'
+alias bundle='PATH="$HOME/.local/share/mise/shims:$ORIG_PATH_WITH_BREW" bundle'
