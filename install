@@ -185,6 +185,7 @@ if [ ! -f "$DEST_HOME/.profile_env" ]; then
 # （例: トークンの設定 export BUNDLE_GITHUB__COM=x-access-token:xxxxxx ）
 
 EOF
+    chmod 600 "$DEST_HOME/.profile_env"
 fi
 
 ##### brew #####
