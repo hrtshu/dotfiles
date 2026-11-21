@@ -1,30 +1,53 @@
 #!/bin/sh
 # mac-cleanup -- delete regenerable caches on macOS without confirmation.
 #
-# Targets are a fixed list of caches only (see CACHE_DIRS below, plus
-# `brew cleanup` and `go clean -cache` when those tools exist).
+# Usage: mac-cleanup [--with-browsers]
+#
+# Targets are fixed lists of caches only (see CACHE_DIRS and
+# BROWSER_CACHE_DIRS below, plus `brew cleanup` and `go clean -cache`
+# when those tools exist). Browser caches are excluded by default and
+# are only targeted when --with-browsers is given.
 # Documents, Downloads, iCloud data and application data are never touched.
 # Only the *contents* of each cache directory are removed; the directory
 # itself is kept. Missing directories are skipped silently.
 
 set -f
 
+usage() {
+    echo "Usage: mac-cleanup [--with-browsers]" >&2
+}
+
+WITH_BROWSERS=0
+for arg in "$@"; do
+    case "$arg" in
+        --with-browsers) WITH_BROWSERS=1 ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
 CACHE_ROOT="$HOME/Library/Caches"
 
-# Fixed list of cache directories under ~/Library/Caches.
+# Fixed list of cache directories under ~/Library/Caches (default targets).
 CACHE_DIRS="
 Homebrew
 com.pinterest.PINDiskCache.PINCacheShared
-Google
 com.todesktop.230313mzl4w4u92.ShipIt
-company.thebrowser.Browser
-Arc
-BraveSoftware
 notion-updater
 GeminiMacOS
 mise
 pip
 go-build
+"
+
+# Browser cache directories: targeted only with --with-browsers.
+BROWSER_CACHE_DIRS="
+Google
+company.thebrowser.Browser
+Arc
+BraveSoftware
 "
 
 # Safety guard: never operate on an empty or root cache path.
@@ -68,6 +91,11 @@ clear_dir_contents() {
     return 0
 }
 
+TARGET_DIRS="$CACHE_DIRS"
+if [ "$WITH_BROWSERS" = "1" ]; then
+    TARGET_DIRS="$CACHE_DIRS $BROWSER_CACHE_DIRS"
+fi
+
 echo "== mac-cleanup =="
 echo "Targets (contents only, directories are kept):"
 if command -v brew >/dev/null 2>&1; then
@@ -77,6 +105,14 @@ if command -v go >/dev/null 2>&1; then
     echo "  - go clean -cache"
 fi
 for name in $CACHE_DIRS; do
+    echo "  - $CACHE_ROOT/$name"
+done
+if [ "$WITH_BROWSERS" = "1" ]; then
+    echo "Browser caches (targets, included via --with-browsers):"
+else
+    echo "Browser caches (excluded; add --with-browsers to include):"
+fi
+for name in $BROWSER_CACHE_DIRS; do
     echo "  - $CACHE_ROOT/$name"
 done
 echo
@@ -102,8 +138,8 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 total_kb=0
-for name in $CACHE_DIRS; do
-    # Only plain directory names from the fixed list are accepted.
+for name in $TARGET_DIRS; do
+    # Only plain directory names from the fixed lists are accepted.
     case "$name" in
         ""|"."|".."|*/*) continue ;;
     esac
