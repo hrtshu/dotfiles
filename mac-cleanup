@@ -1,12 +1,14 @@
 #!/bin/sh
 # mac-cleanup -- delete regenerable caches on macOS without confirmation.
 #
-# Usage: mac-cleanup [--with-browsers]
+# Usage: mac-cleanup [--with-browsers] [--dry-run]
 #
 # Targets are fixed lists of caches only (see CACHE_DIRS and
 # BROWSER_CACHE_DIRS below, plus `brew cleanup` and `go clean -cache`
 # when those tools exist). Browser caches are excluded by default and
-# are only targeted when --with-browsers is given.
+# are only targeted when --with-browsers is given. With --dry-run,
+# nothing is deleted; the targets, their sizes and the commands that
+# would run are only shown.
 # Documents, Downloads, iCloud data and application data are never touched.
 # Only the *contents* of each cache directory are removed; the directory
 # itself is kept. Missing directories are skipped silently.
@@ -14,13 +16,15 @@
 set -f
 
 usage() {
-    echo "Usage: mac-cleanup [--with-browsers]" >&2
+    echo "Usage: mac-cleanup [--with-browsers] [--dry-run]" >&2
 }
 
 WITH_BROWSERS=0
+DRY_RUN=0
 for arg in "$@"; do
     case "$arg" in
         --with-browsers) WITH_BROWSERS=1 ;;
+        --dry-run) DRY_RUN=1 ;;
         *)
             usage
             exit 1
@@ -97,12 +101,23 @@ if [ "$WITH_BROWSERS" = "1" ]; then
 fi
 
 echo "== mac-cleanup =="
+if [ "$DRY_RUN" = "1" ]; then
+    echo "DRY-RUN MODE: nothing will be deleted."
+fi
 echo "Targets (contents only, directories are kept):"
 if command -v brew >/dev/null 2>&1; then
-    echo "  - brew cleanup --prune=all -s"
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "  - brew cleanup --prune=all -s (would run)"
+    else
+        echo "  - brew cleanup --prune=all -s"
+    fi
 fi
 if command -v go >/dev/null 2>&1; then
-    echo "  - go clean -cache"
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "  - go clean -cache (would run)"
+    else
+        echo "  - go clean -cache"
+    fi
 fi
 for name in $CACHE_DIRS; do
     echo "  - $CACHE_ROOT/$name"
@@ -125,15 +140,23 @@ echo
 
 # Homebrew download cache and old versions.
 if command -v brew >/dev/null 2>&1; then
-    echo "-- brew cleanup --prune=all -s"
-    brew cleanup --prune=all -s || true
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "-- would run: brew cleanup --prune=all -s (dry-run; not executed)"
+    else
+        echo "-- brew cleanup --prune=all -s"
+        brew cleanup --prune=all -s || true
+    fi
     echo
 fi
 
 # Go build cache (falls back to clearing the go-build cache dir below).
 if command -v go >/dev/null 2>&1; then
-    echo "-- go clean -cache"
-    go clean -cache || true
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "-- would run: go clean -cache (dry-run; not executed)"
+    else
+        echo "-- go clean -cache"
+        go clean -cache || true
+    fi
     echo
 fi
 
@@ -147,11 +170,23 @@ for name in $TARGET_DIRS; do
     [ -d "$target" ] || continue
     kb="$(dir_kb "$target")"
     [ -n "$kb" ] || kb=0
-    echo "-- $target ($(human "$kb"))"
     total_kb=$((total_kb + kb))
-    clear_dir_contents "$target"
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "-- would clear: $target ($(human "$kb"))"
+    else
+        echo "-- $target ($(human "$kb"))"
+        clear_dir_contents "$target"
+    fi
 done
 echo
+
+if [ "$DRY_RUN" = "1" ]; then
+    echo "Dry run: nothing was deleted."
+    echo "Estimated space to free (cache directories): $(human "$total_kb")"
+    echo "Free space now: $(human "$before_free")"
+    df -h / | tail -1
+    exit 0
+fi
 
 after_free="$(free_kb)"
 [ -n "$after_free" ] || after_free=0
