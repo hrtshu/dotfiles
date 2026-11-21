@@ -1,0 +1,128 @@
+#!/bin/sh
+# mac-cleanup -- delete regenerable caches on macOS without confirmation.
+#
+# Targets are a fixed list of caches only (see CACHE_DIRS below, plus
+# `brew cleanup` and `go clean -cache` when those tools exist).
+# Documents, Downloads, iCloud data and application data are never touched.
+# Only the *contents* of each cache directory are removed; the directory
+# itself is kept. Missing directories are skipped silently.
+
+set -f
+
+CACHE_ROOT="$HOME/Library/Caches"
+
+# Fixed list of cache directories under ~/Library/Caches.
+CACHE_DIRS="
+Homebrew
+com.pinterest.PINDiskCache.PINCacheShared
+Google
+com.todesktop.230313mzl4w4u92.ShipIt
+company.thebrowser.Browser
+Arc
+BraveSoftware
+notion-updater
+GeminiMacOS
+mise
+pip
+go-build
+"
+
+# Safety guard: never operate on an empty or root cache path.
+case "$CACHE_ROOT" in
+    ""|"/"|"//")
+        echo "mac-cleanup: invalid HOME, aborting" >&2
+        exit 1
+        ;;
+esac
+
+free_kb() {
+    df -k / 2>/dev/null | awk 'NR == 2 { print $4 }'
+}
+
+human() {
+    awk -v kb="$1" 'BEGIN {
+        if (kb >= 1048576) printf "%.1f GB", kb / 1048576
+        else if (kb >= 1024) printf "%.1f MB", kb / 1024
+        else printf "%d KB", kb
+    }'
+}
+
+dir_kb() {
+    [ -d "$1" ] || { echo 0; return; }
+    du -sk "$1" 2>/dev/null | awk '{ print $1 }'
+}
+
+# Remove the contents of $1, keeping the directory itself.
+# Refuses anything that is not a direct child of $CACHE_ROOT.
+clear_dir_contents() {
+    target="$1"
+    case "$target" in
+        "$CACHE_ROOT"/?*) ;;
+        *)
+            echo "skip (outside cache root): $target"
+            return 1
+            ;;
+    esac
+    [ -d "$target" ] || return 0
+    find "$target" -mindepth 1 -delete 2>/dev/null
+    return 0
+}
+
+echo "== mac-cleanup =="
+echo "Targets (contents only, directories are kept):"
+if command -v brew >/dev/null 2>&1; then
+    echo "  - brew cleanup --prune=all -s"
+fi
+if command -v go >/dev/null 2>&1; then
+    echo "  - go clean -cache"
+fi
+for name in $CACHE_DIRS; do
+    echo "  - $CACHE_ROOT/$name"
+done
+echo
+
+before_free="$(free_kb)"
+[ -n "$before_free" ] || before_free=0
+echo "Free space before: $(human "$before_free")"
+df -h / | tail -1
+echo
+
+# Homebrew download cache and old versions.
+if command -v brew >/dev/null 2>&1; then
+    echo "-- brew cleanup --prune=all -s"
+    brew cleanup --prune=all -s || true
+    echo
+fi
+
+# Go build cache (falls back to clearing the go-build cache dir below).
+if command -v go >/dev/null 2>&1; then
+    echo "-- go clean -cache"
+    go clean -cache || true
+    echo
+fi
+
+total_kb=0
+for name in $CACHE_DIRS; do
+    # Only plain directory names from the fixed list are accepted.
+    case "$name" in
+        ""|"."|".."|*/*) continue ;;
+    esac
+    target="$CACHE_ROOT/$name"
+    [ -d "$target" ] || continue
+    kb="$(dir_kb "$target")"
+    [ -n "$kb" ] || kb=0
+    echo "-- $target ($(human "$kb"))"
+    total_kb=$((total_kb + kb))
+    clear_dir_contents "$target"
+done
+echo
+
+after_free="$(free_kb)"
+[ -n "$after_free" ] || after_free=0
+freed_kb=$((after_free - before_free))
+[ "$freed_kb" -ge 0 ] || freed_kb=0
+
+echo "Cache directories cleared: $(human "$total_kb")"
+echo "Free space after:  $(human "$after_free")"
+df -h / | tail -1
+echo "Freed (approx):    $(human "$freed_kb")"
