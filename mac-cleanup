@@ -1,0 +1,217 @@
+#!/bin/sh
+# mac-cleanup -- show (and optionally delete) regenerable caches on macOS.
+#
+# Usage: mac-cleanup [--with-browsers] [--force] [--dry-run]
+#
+# By default this is a DRY RUN: the targets, their sizes and the
+# commands that would run are only shown, and nothing is deleted.
+# Actual deletion happens only when --force is given. --dry-run can
+# be given explicitly and wins over --force if both are given.
+#
+# Targets are fixed lists of caches only (see CACHE_DIRS and
+# BROWSER_CACHE_DIRS below, plus `brew cleanup` and `go clean -cache`
+# when those tools exist). Browser caches are excluded by default and
+# are only targeted when --with-browsers is given.
+# Documents, Downloads, iCloud data and application data are never touched.
+# Only the *contents* of each cache directory are removed; the directory
+# itself is kept. Missing directories are skipped silently.
+
+set -f
+
+usage() {
+    echo "Usage: mac-cleanup [--with-browsers] [--force] [--dry-run]" >&2
+    echo "  (no options)      dry-run: show targets and sizes, delete nothing (default)" >&2
+    echo "  --with-browsers   also target browser caches (Google, Arc, Brave, ...)" >&2
+    echo "  --force           actually delete the targeted cache contents" >&2
+    echo "  --dry-run         show only, delete nothing; wins over --force" >&2
+}
+
+WITH_BROWSERS=0
+FORCE=0
+DRY_RUN_FLAG=0
+for arg in "$@"; do
+    case "$arg" in
+        --with-browsers) WITH_BROWSERS=1 ;;
+        --force) FORCE=1 ;;
+        --dry-run) DRY_RUN_FLAG=1 ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+# Default is dry-run. Deletion requires --force, and an explicit
+# --dry-run always wins over --force (fail safe: delete nothing).
+DRY_RUN=1
+if [ "$FORCE" = "1" ] && [ "$DRY_RUN_FLAG" = "0" ]; then
+    DRY_RUN=0
+fi
+
+CACHE_ROOT="$HOME/Library/Caches"
+
+# Fixed list of cache directories under ~/Library/Caches (default targets).
+CACHE_DIRS="
+Homebrew
+com.pinterest.PINDiskCache.PINCacheShared
+com.todesktop.230313mzl4w4u92.ShipIt
+notion-updater
+GeminiMacOS
+mise
+pip
+go-build
+"
+
+# Browser cache directories: targeted only with --with-browsers.
+BROWSER_CACHE_DIRS="
+Google
+company.thebrowser.Browser
+Arc
+BraveSoftware
+"
+
+# Safety guard: never operate on an empty or root cache path.
+case "$CACHE_ROOT" in
+    ""|"/"|"//")
+        echo "mac-cleanup: invalid HOME, aborting" >&2
+        exit 1
+        ;;
+esac
+
+free_kb() {
+    df -k / 2>/dev/null | awk 'NR == 2 { print $4 }'
+}
+
+human() {
+    awk -v kb="$1" 'BEGIN {
+        if (kb >= 1048576) printf "%.1f GB", kb / 1048576
+        else if (kb >= 1024) printf "%.1f MB", kb / 1024
+        else printf "%d KB", kb
+    }'
+}
+
+dir_kb() {
+    [ -d "$1" ] || { echo 0; return; }
+    du -sk "$1" 2>/dev/null | awk '{ print $1 }'
+}
+
+# Remove the contents of $1, keeping the directory itself.
+# Refuses anything that is not a direct child of $CACHE_ROOT.
+clear_dir_contents() {
+    target="$1"
+    case "$target" in
+        "$CACHE_ROOT"/?*) ;;
+        *)
+            echo "skip (outside cache root): $target"
+            return 1
+            ;;
+    esac
+    [ -d "$target" ] || return 0
+    find "$target" -mindepth 1 -delete 2>/dev/null
+    return 0
+}
+
+TARGET_DIRS="$CACHE_DIRS"
+if [ "$WITH_BROWSERS" = "1" ]; then
+    TARGET_DIRS="$CACHE_DIRS $BROWSER_CACHE_DIRS"
+fi
+
+echo "== mac-cleanup =="
+if [ "$DRY_RUN" = "1" ]; then
+    echo "DRY-RUN: nothing will be deleted. To actually delete, re-run with --force."
+else
+    echo "FORCE MODE: the targeted cache contents will actually be deleted."
+fi
+echo "Targets (contents only, directories are kept):"
+if command -v brew >/dev/null 2>&1; then
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "  - brew cleanup --prune=all -s (would run)"
+    else
+        echo "  - brew cleanup --prune=all -s"
+    fi
+fi
+if command -v go >/dev/null 2>&1; then
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "  - go clean -cache (would run)"
+    else
+        echo "  - go clean -cache"
+    fi
+fi
+for name in $CACHE_DIRS; do
+    echo "  - $CACHE_ROOT/$name"
+done
+if [ "$WITH_BROWSERS" = "1" ]; then
+    echo "Browser caches (targets, included via --with-browsers):"
+else
+    echo "Browser caches (excluded; add --with-browsers to include):"
+fi
+for name in $BROWSER_CACHE_DIRS; do
+    echo "  - $CACHE_ROOT/$name"
+done
+echo
+
+before_free="$(free_kb)"
+[ -n "$before_free" ] || before_free=0
+echo "Free space before: $(human "$before_free")"
+df -h / | tail -1
+echo
+
+# Homebrew download cache and old versions.
+if command -v brew >/dev/null 2>&1; then
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "-- would run: brew cleanup --prune=all -s (dry-run; not executed)"
+    else
+        echo "-- brew cleanup --prune=all -s"
+        brew cleanup --prune=all -s || true
+    fi
+    echo
+fi
+
+# Go build cache (falls back to clearing the go-build cache dir below).
+if command -v go >/dev/null 2>&1; then
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "-- would run: go clean -cache (dry-run; not executed)"
+    else
+        echo "-- go clean -cache"
+        go clean -cache || true
+    fi
+    echo
+fi
+
+total_kb=0
+for name in $TARGET_DIRS; do
+    # Only plain directory names from the fixed lists are accepted.
+    case "$name" in
+        ""|"."|".."|*/*) continue ;;
+    esac
+    target="$CACHE_ROOT/$name"
+    [ -d "$target" ] || continue
+    kb="$(dir_kb "$target")"
+    [ -n "$kb" ] || kb=0
+    total_kb=$((total_kb + kb))
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "-- would clear: $target ($(human "$kb"))"
+    else
+        echo "-- $target ($(human "$kb"))"
+        clear_dir_contents "$target"
+    fi
+done
+echo
+
+if [ "$DRY_RUN" = "1" ]; then
+    echo "Dry run: nothing was deleted."
+    echo "Estimated space to free (cache directories): $(human "$total_kb")"
+    echo "Free space now: $(human "$before_free")"
+    df -h / | tail -1
+    exit 0
+fi
+
+after_free="$(free_kb)"
+[ -n "$after_free" ] || after_free=0
+freed_kb=$((after_free - before_free))
+[ "$freed_kb" -ge 0 ] || freed_kb=0
+
+echo "Cache directories cleared: $(human "$total_kb")"
+echo "Free space after:  $(human "$after_free")"
+df -h / | tail -1
+echo "Freed (approx):    $(human "$freed_kb")"
