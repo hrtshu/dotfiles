@@ -76,12 +76,9 @@ brew "tor"
 brew "mas"
 
 # cask
-cask "arc"
 cask "maccy"
 cask "monitorcontrol"
-cask "switchresx"
 cask "google-chrome"
-# cask "lastpass"
 cask "cursor"
 cask "visual-studio-code"
 cask "slack"
@@ -91,11 +88,11 @@ cask "altair-graphql-client"
 cask "mysqlworkbench"
 # cask "docker"
 cask "orbstack"
-cask "android-studio"
-cask "microsoft-excel"
-cask "microsoft-word"
-cask "microsoft-powerpoint"
-cask "microsoft-edge"
+# cask "android-studio"
+# cask "microsoft-excel"
+# cask "microsoft-word"
+# cask "microsoft-powerpoint"
+# cask "microsoft-edge"
 cask "keepassxc"
 cask "wireshark-app"
 cask "google-drive"
@@ -107,8 +104,6 @@ cask "popclip"
 mas "Speedtest by Ookla", id: 1153157709
 mas "AS Timer", id: 512464723
 mas "Battery Monitor: Health, Info", id: 836505650
-mas "Stickies - Sticky notes app", id: 1572061218
-mas "Magnet", id: 441258766
 
 # my tools
 brew "hrtshu/tap/window-placer"
